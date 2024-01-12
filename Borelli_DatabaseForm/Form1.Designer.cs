@@ -25,10 +25,22 @@
         private void InitializeComponent() {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabDipartimenti = new System.Windows.Forms.TabPage();
+            this.dataGridViewDipartimenti = new System.Windows.Forms.DataGridView();
             this.tabPageImpiegati = new System.Windows.Forms.TabPage();
             this.tabPagePartecipazioni = new System.Windows.Forms.TabPage();
             this.tabPageProgetti = new System.Windows.Forms.TabPage();
+            this.dataGridViewImpiegati = new System.Windows.Forms.DataGridView();
+            this.dataGridViewPartecipazioni = new System.Windows.Forms.DataGridView();
+            this.dataGridViewProgetti = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
+            this.tabDipartimenti.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDipartimenti)).BeginInit();
+            this.tabPageImpiegati.SuspendLayout();
+            this.tabPagePartecipazioni.SuspendLayout();
+            this.tabPageProgetti.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImpiegati)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartecipazioni)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -56,6 +68,13 @@
             this.tabDipartimenti.Text = "DIPARTIMENTI";
             this.tabDipartimenti.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewDipartimenti
+            // 
+            this.dataGridViewDipartimenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDipartimenti.Location = new System.Drawing.Point(209, 3);
+            this.dataGridViewDipartimenti.Name = "dataGridViewDipartimenti";
+            this.dataGridViewDipartimenti.Size = new System.Drawing.Size(575, 413);
+            this.dataGridViewDipartimenti.TabIndex = 0;
             // 
             // tabPageImpiegati
             // 
@@ -86,6 +105,31 @@
             this.tabPageProgetti.TabIndex = 2;
             this.tabPageProgetti.Text = "PROGETTI";
             this.tabPageProgetti.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewImpiegati
+            // 
+            this.dataGridViewImpiegati.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewImpiegati.Location = new System.Drawing.Point(209, 3);
+            this.dataGridViewImpiegati.Name = "dataGridViewImpiegati";
+            this.dataGridViewImpiegati.Size = new System.Drawing.Size(575, 413);
+            this.dataGridViewImpiegati.TabIndex = 1;
+            // 
+            // dataGridViewPartecipazioni
+            // 
+            this.dataGridViewPartecipazioni.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPartecipazioni.Location = new System.Drawing.Point(209, 3);
+            this.dataGridViewPartecipazioni.Name = "dataGridViewPartecipazioni";
+            this.dataGridViewPartecipazioni.Size = new System.Drawing.Size(575, 413);
+            this.dataGridViewPartecipazioni.TabIndex = 1;
+            // 
+            // dataGridViewProgetti
+            // 
+            this.dataGridViewProgetti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewProgetti.Location = new System.Drawing.Point(209, 3);
+            this.dataGridViewProgetti.Name = "dataGridViewProgetti";
+            this.dataGridViewProgetti.Size = new System.Drawing.Size(575, 413);
+            this.dataGridViewProgetti.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -95,6 +139,14 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
+            this.tabDipartimenti.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDipartimenti)).EndInit();
+            this.tabPageImpiegati.ResumeLayout(false);
+            this.tabPagePartecipazioni.ResumeLayout(false);
+            this.tabPageProgetti.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImpiegati)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartecipazioni)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -104,8 +156,12 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabDipartimenti;
         private System.Windows.Forms.TabPage tabPageImpiegati;
+        private System.Windows.Forms.DataGridView dataGridViewDipartimenti;
         private System.Windows.Forms.TabPage tabPagePartecipazioni;
         private System.Windows.Forms.TabPage tabPageProgetti;
+        private System.Windows.Forms.DataGridView dataGridViewImpiegati;
+        private System.Windows.Forms.DataGridView dataGridViewPartecipazioni;
+        private System.Windows.Forms.DataGridView dataGridViewProgetti;
     }
 }
 
