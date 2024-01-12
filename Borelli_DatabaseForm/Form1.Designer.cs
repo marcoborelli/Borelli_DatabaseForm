@@ -215,6 +215,7 @@
             this.bFiltraInDipartimenti.TabIndex = 5;
             this.bFiltraInDipartimenti.Text = "FILTRA";
             this.bFiltraInDipartimenti.UseVisualStyleBackColor = true;
+            this.bFiltraInDipartimenti.Click += new System.EventHandler(this.bFiltraInDipartimenti_Click);
             // 
             // bResetIndipartimenti
             // 
@@ -224,6 +225,7 @@
             this.bResetIndipartimenti.TabIndex = 6;
             this.bResetIndipartimenti.Text = "RESET VALORI";
             this.bResetIndipartimenti.UseVisualStyleBackColor = true;
+            this.bResetIndipartimenti.Click += new System.EventHandler(this.bResetIndipartimenti_Click);
             // 
             // Form1
             // 

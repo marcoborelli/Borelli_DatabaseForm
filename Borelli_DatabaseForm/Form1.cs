@@ -64,7 +64,17 @@ namespace Borelli_DatabaseForm {
         }
 
 
+        /* TAB 1*/
+        private void bFiltraInDipartimenti_Click(object sender, EventArgs e) {
+            string q = $"{GetBasicQuery(tabControl1.SelectedIndex)} WHERE dipartimenti.sede LIKE '{tbNomeCittaInDipartimenti.Text}%' AND impiegati.cognome LIKE '{tbCognResponsInDipartimenti.Text}%'";
+            LoadDataOnSelectedTab(q);
         }
+
+        private void bResetIndipartimenti_Click(object sender, EventArgs e) {
+            tbCognResponsInDipartimenti.Text = tbNomeCittaInDipartimenti.Text = String.Empty;
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+        /*FINE TAB 1*/
 
         private string GetBasicQuery(int tabIndex) {
             string query = "";
