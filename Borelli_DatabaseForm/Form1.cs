@@ -56,7 +56,7 @@ namespace Borelli_DatabaseForm {
             tableName = new string[] { "dipartimenti", "impiegati", "partecipazioni", "progetti" };
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewPartecipazioni, dataGridViewProgetti };
 
-            LoadBasicDataOnSelectedTab();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
         private MySqlDataAdapter ExecQuery(string command) {
@@ -79,11 +79,11 @@ namespace Borelli_DatabaseForm {
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
-            LoadBasicDataOnSelectedTab();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
-        private void LoadBasicDataOnSelectedTab() {
-            MySqlDataAdapter MyAdapter = ExecQuery($"{GetBasicQuery(tabControl1.SelectedIndex)};");
+        private void LoadDataOnSelectedTab(string query) {
+            MySqlDataAdapter MyAdapter = ExecQuery($"{query};");
             DataTable dati = new DataTable();
             MyAdapter.Fill(dati);
 
