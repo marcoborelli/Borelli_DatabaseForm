@@ -18,7 +18,7 @@ namespace Borelli_DatabaseForm {
                     }
                 }
 
-                _sqlConn.Open(); //non so se sia logicamente giusto aprirla di default
+                /*_sqlConn.Open(); //non so se sia logicamente giusto aprirla di default
 
                 int attemps = 0;
                 bool first = true;
@@ -34,7 +34,7 @@ namespace Borelli_DatabaseForm {
 
                 if (attemps == 15) {
                     throw new Exception("Il server non risponde al ping");
-                }
+                }*/
 
                 return _sqlConn;
             }
