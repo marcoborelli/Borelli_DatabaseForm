@@ -59,35 +59,11 @@ namespace Borelli_DatabaseForm {
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
-        private MySqlDataAdapter ExecQuery(string command) {
-            MySqlDataAdapter myAdapter = null;
-
-            try {
-                SqlConnection.Open();
-
-                MySqlCommand cmd = new MySqlCommand(command, SqlConnection);
-                cmd.ExecuteNonQuery();
-                myAdapter = new MySqlDataAdapter();
-                myAdapter.SelectCommand = cmd;
-
-                SqlConnection.Close();
-            } catch (Exception e) {
-                throw new Exception(e.Message);
-            }
-
-            return myAdapter;
-        }
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
-        private void LoadDataOnSelectedTab(string query) {
-            MySqlDataAdapter MyAdapter = ExecQuery($"{query};");
-            DataTable dati = new DataTable();
-            MyAdapter.Fill(dati);
 
-            gridsView[tabControl1.SelectedIndex].DataSource = dati;
         }
 
         private string GetBasicQuery(int tabIndex) {
@@ -111,6 +87,33 @@ namespace Borelli_DatabaseForm {
             }
 
             return query;
+        }
+
+        private void LoadDataOnSelectedTab(string query) {
+            MySqlDataAdapter MyAdapter = ExecQuery($"{query};");
+            DataTable dati = new DataTable();
+            MyAdapter.Fill(dati);
+
+            gridsView[tabControl1.SelectedIndex].DataSource = dati;
+        }
+
+        private MySqlDataAdapter ExecQuery(string command) {
+            MySqlDataAdapter myAdapter = null;
+
+            try {
+                SqlConnection.Open();
+
+                MySqlCommand cmd = new MySqlCommand(command, SqlConnection);
+                cmd.ExecuteNonQuery();
+                myAdapter = new MySqlDataAdapter();
+                myAdapter.SelectCommand = cmd;
+
+                SqlConnection.Close();
+            } catch (Exception e) {
+                throw new Exception(e.Message);
+            }
+
+            return myAdapter;
         }
     }
 }
