@@ -47,8 +47,14 @@ namespace Borelli_DatabaseForm {
             Progetti
         }
 
+        private string[] tableName;
+        private DataGridView[] gridsView;
+
         public Form1() {
             InitializeComponent();
+
+            tableName = new string[] { "dipartimenti", "impiegati", "partecipazioni", "progetti" };
+            gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewPartecipazioni, dataGridViewProgetti };
         }
 
         private MySqlDataAdapter ExecQuery(string command) {
@@ -68,6 +74,13 @@ namespace Borelli_DatabaseForm {
             }
 
             return myAdapter;
+        }
+        private void LoadBasicDataOnSelectedTab() {
+            MySqlDataAdapter MyAdapter = ExecQuery($"select * from {tableName[tabControl1.SelectedIndex]};");
+            DataTable dati = new DataTable();
+            MyAdapter.Fill(dati);
+
+            gridsView[tabControl1.SelectedIndex].DataSource = dati;
         }
     }
 }
