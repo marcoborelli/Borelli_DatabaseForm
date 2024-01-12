@@ -42,5 +42,24 @@ namespace Borelli_DatabaseForm {
         public Form1() {
             InitializeComponent();
         }
+
+        private MySqlDataAdapter ExecQuery(string command) {
+            MySqlDataAdapter myAdapter = null;
+
+            try {
+                SqlConnection.Open();
+
+                MySqlCommand cmd = new MySqlCommand(command, SqlConnection);
+                cmd.ExecuteNonQuery();
+                myAdapter = new MySqlDataAdapter();
+                myAdapter.SelectCommand = cmd;
+
+                SqlConnection.Close();
+            } catch (Exception e) {
+                throw new Exception(e.Message);
+            }
+
+            return myAdapter;
+        }
     }
 }
