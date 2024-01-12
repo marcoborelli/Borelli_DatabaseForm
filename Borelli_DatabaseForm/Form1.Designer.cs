@@ -24,8 +24,10 @@
         /// </summary>
         private void InitializeComponent() {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabDipartimenti = new System.Windows.Forms.TabPage();
+            this.tabPageImpiegati = new System.Windows.Forms.TabPage();
+            this.tabPagePartecipazioni = new System.Windows.Forms.TabPage();
+            this.tabPageProgetti = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -34,32 +36,56 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabDipartimenti);
+            this.tabControl1.Controls.Add(this.tabPageImpiegati);
+            this.tabControl1.Controls.Add(this.tabPagePartecipazioni);
+            this.tabControl1.Controls.Add(this.tabPageProgetti);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(801, 453);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // tabDipartimenti
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(793, 427);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabDipartimenti.Controls.Add(this.dataGridViewDipartimenti);
+            this.tabDipartimenti.Location = new System.Drawing.Point(4, 22);
+            this.tabDipartimenti.Name = "tabDipartimenti";
+            this.tabDipartimenti.Size = new System.Drawing.Size(793, 427);
+            this.tabDipartimenti.TabIndex = 0;
+            this.tabDipartimenti.Text = "DIPARTIMENTI";
+            this.tabDipartimenti.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1068, 427);
-            this.tabPage2.TabIndex = 0;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            // tabPageImpiegati
             // 
+            this.tabPageImpiegati.Controls.Add(this.dataGridViewImpiegati);
+            this.tabPageImpiegati.Location = new System.Drawing.Point(4, 22);
+            this.tabPageImpiegati.Name = "tabPageImpiegati";
+            this.tabPageImpiegati.Size = new System.Drawing.Size(793, 427);
+            this.tabPageImpiegati.TabIndex = 0;
+            this.tabPageImpiegati.Text = "IMPIEGATI";
+            this.tabPageImpiegati.UseVisualStyleBackColor = true;
+            // 
+            // tabPagePartecipazioni
+            // 
+            this.tabPagePartecipazioni.Controls.Add(this.dataGridViewPartecipazioni);
+            this.tabPagePartecipazioni.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePartecipazioni.Name = "tabPagePartecipazioni";
+            this.tabPagePartecipazioni.Size = new System.Drawing.Size(793, 427);
+            this.tabPagePartecipazioni.TabIndex = 1;
+            this.tabPagePartecipazioni.Text = "PARTECIPAZIONI";
+            this.tabPagePartecipazioni.UseVisualStyleBackColor = true;
+            // 
+            // tabPageProgetti
+            // 
+            this.tabPageProgetti.Controls.Add(this.dataGridViewProgetti);
+            this.tabPageProgetti.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProgetti.Name = "tabPageProgetti";
+            this.tabPageProgetti.Size = new System.Drawing.Size(793, 427);
+            this.tabPageProgetti.TabIndex = 2;
+            this.tabPageProgetti.Text = "PROGETTI";
+            this.tabPageProgetti.UseVisualStyleBackColor = true;
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -76,8 +102,10 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabDipartimenti;
+        private System.Windows.Forms.TabPage tabPageImpiegati;
+        private System.Windows.Forms.TabPage tabPagePartecipazioni;
+        private System.Windows.Forms.TabPage tabPageProgetti;
     }
 }
 
