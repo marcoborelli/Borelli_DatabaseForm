@@ -83,11 +83,34 @@ namespace Borelli_DatabaseForm {
         }
 
         private void LoadBasicDataOnSelectedTab() {
-            MySqlDataAdapter MyAdapter = ExecQuery($"select * from {tableName[tabControl1.SelectedIndex]};");
+            MySqlDataAdapter MyAdapter = ExecQuery($"{GetBasicQuery(tabControl1.SelectedIndex)};");
             DataTable dati = new DataTable();
             MyAdapter.Fill(dati);
 
             gridsView[tabControl1.SelectedIndex].DataSource = dati;
+        }
+
+        private string GetBasicQuery(int tabIndex) {
+            string query = "";
+
+            switch (tabControl1.SelectedIndex) {
+                case (int)eTabPages.Dipartimenti:
+                    query = "SELECT dipartimenti.codice, dipartimenti.nome, dipartimenti.sede, impiegati.cognome AS 'cognome responsabile' FROM dipartimenti JOIN impiegati ON impiegati.matricola = dipartimenti.id_direttore";
+                    break;
+                case (int)eTabPages.Impiegati:
+                    query = "SELECT impiegati.matricola, impiegati.cognome, impiegati.stipendio, dipartimenti.nome AS 'nome dipartimento' FROM dipartimenti JOIN impiegati ON impiegati.id_dipartimento = dipartimenti.codice";
+                    break;
+                case (int)eTabPages.Partecipazioni:
+                    query = "SELECT impiegati.matricola AS 'matricola impiegato', impiegati.cognome AS 'cognome impiegato', progetti.nome AS 'nome progetto' FROM (partecipazioni JOIN impiegati ON partecipazioni.id_impiegato = impiegati.matricola) JOIN progetti ON partecipazioni.id_progetto = progetti.sigla";
+                    break;
+                case (int)eTabPages.Progetti:
+                    query = "SELECT progetti.sigla, progetti.nome, progetti.bilancio, impiegati.cognome AS 'cognome responsabile' FROM progetti JOIN impiegati ON progetti.id_responsabile = impiegati.matricola";
+                    break;
+                default:
+                    throw new Exception("Index non valido");
+            }
+
+            return query;
         }
     }
 }
