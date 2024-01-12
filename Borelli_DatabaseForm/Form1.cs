@@ -39,6 +39,14 @@ namespace Borelli_DatabaseForm {
                 return _sqlConn;
             }
         }
+
+        public enum eTabPages {
+            Dipartimenti,
+            Impiegati,
+            Partecipazioni,
+            Progetti
+        }
+
         public Form1() {
             InitializeComponent();
         }
