@@ -83,7 +83,8 @@ namespace Borelli_DatabaseForm {
         }
 
         private void bResetInImpiegati_Click(object sender, EventArgs e) {
-            tbCognomeInImpiegati.Text = cbSegnoStipendioInImpiegati.Text = mtbStipendioInImpiegati.Text = cbNomeDipartInImpiegati.Text = "";
+            tbCognomeInImpiegati.Text = mtbStipendioInImpiegati.Text = cbNomeDipartInImpiegati.Text = "";
+            cbSegnoStipendioInImpiegati.SelectedIndex = 0;
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
         /*FINE TAB 2*/
@@ -122,7 +123,8 @@ namespace Borelli_DatabaseForm {
         }
 
         private void bResetInProgetti_Click(object sender, EventArgs e) {
-            tbSiglaInProgetti.Text = tbNomeInProgetti.Text = cbSegnoBilancioInProgetti.Text = mtbBilancioInProgetti.Text = tbCognResponsInProgetti.Text = "";
+            tbSiglaInProgetti.Text = tbNomeInProgetti.Text = mtbBilancioInProgetti.Text = tbCognResponsInProgetti.Text = "";
+            cbSegnoBilancioInProgetti.SelectedIndex = 0;
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
         /*FINE TAB 4*/
@@ -193,7 +195,7 @@ namespace Borelli_DatabaseForm {
         private string CheckIfValidOperatorAndNumber(ComboBox cbOperatore, MaskedTextBox num) {
             if (String.IsNullOrWhiteSpace(cbOperatore.Text) && !String.IsNullOrWhiteSpace(num.Text)) {
                 return "Inerire l'operatore matematico per confrontare il numero";
-            } else if (!String.IsNullOrWhiteSpace(cbOperatore.Text) && String.IsNullOrWhiteSpace(num.Text)) {;
+            } else if (!String.IsNullOrWhiteSpace(cbOperatore.Text) && String.IsNullOrWhiteSpace(num.Text)) {
                 return "Inserire un valore da confrontare";
             }
             return String.Empty;
