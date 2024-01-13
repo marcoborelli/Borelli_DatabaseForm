@@ -53,6 +53,15 @@
             this.bFiltraInImpiegati = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.mtbStipendioInImpiegati = new System.Windows.Forms.MaskedTextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.bResetInPartecipazioni = new System.Windows.Forms.Button();
+            this.bFiltraInPartecipazioni = new System.Windows.Forms.Button();
+            this.tbCognomeInPartecipazioni = new System.Windows.Forms.TextBox();
+            this.tbNomeProgInPartecipazioni = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tabDipartimenti.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -64,6 +73,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartecipazioni)).BeginInit();
             this.tabPageProgetti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).BeginInit();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -260,6 +270,8 @@
             // 
             // tabPagePartecipazioni
             // 
+            this.tabPagePartecipazioni.Controls.Add(this.panel5);
+            this.tabPagePartecipazioni.Controls.Add(this.panel6);
             this.tabPagePartecipazioni.Controls.Add(this.dataGridViewPartecipazioni);
             this.tabPagePartecipazioni.Location = new System.Drawing.Point(4, 22);
             this.tabPagePartecipazioni.Name = "tabPagePartecipazioni";
@@ -365,6 +377,88 @@
             this.mtbStipendioInImpiegati.TabIndex = 0;
             this.mtbStipendioInImpiegati.ValidatingType = typeof(int);
             // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel5.Controls.Add(this.bResetInPartecipazioni);
+            this.panel5.Controls.Add(this.bFiltraInPartecipazioni);
+            this.panel5.Controls.Add(this.tbCognomeInPartecipazioni);
+            this.panel5.Controls.Add(this.tbNomeProgInPartecipazioni);
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.label10);
+            this.panel5.Location = new System.Drawing.Point(3, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 133);
+            this.panel5.TabIndex = 4;
+            // 
+            // bResetInPartecipazioni
+            // 
+            this.bResetInPartecipazioni.Location = new System.Drawing.Point(6, 103);
+            this.bResetInPartecipazioni.Name = "bResetInPartecipazioni";
+            this.bResetInPartecipazioni.Size = new System.Drawing.Size(110, 23);
+            this.bResetInPartecipazioni.TabIndex = 6;
+            this.bResetInPartecipazioni.Text = "RESET VALORI";
+            this.bResetInPartecipazioni.UseVisualStyleBackColor = true;
+            // 
+            // bFiltraInPartecipazioni
+            // 
+            this.bFiltraInPartecipazioni.Location = new System.Drawing.Point(122, 103);
+            this.bFiltraInPartecipazioni.Name = "bFiltraInPartecipazioni";
+            this.bFiltraInPartecipazioni.Size = new System.Drawing.Size(75, 23);
+            this.bFiltraInPartecipazioni.TabIndex = 5;
+            this.bFiltraInPartecipazioni.Text = "FILTRA";
+            this.bFiltraInPartecipazioni.UseVisualStyleBackColor = true;
+            // 
+            // tbCognomeInPartecipazioni
+            // 
+            this.tbCognomeInPartecipazioni.Location = new System.Drawing.Point(70, 66);
+            this.tbCognomeInPartecipazioni.Name = "tbCognomeInPartecipazioni";
+            this.tbCognomeInPartecipazioni.Size = new System.Drawing.Size(127, 20);
+            this.tbCognomeInPartecipazioni.TabIndex = 4;
+            // 
+            // tbNomeProgInPartecipazioni
+            // 
+            this.tbNomeProgInPartecipazioni.Location = new System.Drawing.Point(70, 27);
+            this.tbNomeProgInPartecipazioni.Name = "tbNomeProgInPartecipazioni";
+            this.tbNomeProgInPartecipazioni.Size = new System.Drawing.Size(127, 20);
+            this.tbNomeProgInPartecipazioni.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 61);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 26);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Cognome\r\nImpiegato:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 26);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Nome\r\nprogetto:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 2);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "FILTRA PER:";
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel6.Location = new System.Drawing.Point(3, 142);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 274);
+            this.panel6.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -386,6 +480,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartecipazioni)).EndInit();
             this.tabPageProgetti.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -422,6 +518,15 @@
         private System.Windows.Forms.Button bResetInImpiegati;
         private System.Windows.Forms.Button bFiltraInImpiegati;
         private System.Windows.Forms.MaskedTextBox mtbStipendioInImpiegati;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button bResetInPartecipazioni;
+        private System.Windows.Forms.Button bFiltraInPartecipazioni;
+        private System.Windows.Forms.TextBox tbCognomeInPartecipazioni;
+        private System.Windows.Forms.TextBox tbNomeProgInPartecipazioni;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panel6;
     }
 }
 
