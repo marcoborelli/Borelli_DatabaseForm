@@ -20,24 +20,6 @@ namespace Borelli_DatabaseForm {
                     }
                 }
 
-                /*_sqlConn.Open(); //non so se sia logicamente giusto aprirla di default
-
-                int attemps = 0;
-                bool first = true;
-                do {
-                    attemps++;
-
-                    if (first) {
-                        first = false;
-                    } else {
-                        Thread.Sleep(250);
-                    }
-                } while (!_sqlConn.Ping() && attemps < 15);
-
-                if (attemps == 15) {
-                    throw new Exception("Il server non risponde al ping");
-                }*/
-
                 return _sqlConn;
             }
         }
@@ -49,14 +31,12 @@ namespace Borelli_DatabaseForm {
             Progetti
         }
 
-        private string[] tableName;
         private DataGridView[] gridsView;
         bool isBasicQuery;
 
         public Form1() {
             InitializeComponent();
 
-            tableName = new string[] { "dipartimenti", "impiegati", "partecipazioni", "progetti" };
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewPartecipazioni, dataGridViewProgetti };
 
             isBasicQuery = true;
@@ -87,11 +67,9 @@ namespace Borelli_DatabaseForm {
 
         /*TAB 2*/
         private void bFiltraInImpiegati_Click(object sender, EventArgs e) {
-            if (String.IsNullOrWhiteSpace(cbSegnoStipendioInImpiegati.Text) && !String.IsNullOrWhiteSpace(mtbStipendioInImpiegati.Text)) {
-                MessageBox.Show("Inerire l'operatore matematico per confrontare lo stipendio");
-                return;
-            } else if (!String.IsNullOrWhiteSpace(cbSegnoStipendioInImpiegati.Text) && String.IsNullOrWhiteSpace(mtbStipendioInImpiegati.Text)) {
-                MessageBox.Show("Inserire uno stipendio da confrontare");
+            string res = CheckIfValidOperatorAndNumber(cbSegnoStipendioInImpiegati, mtbStipendioInImpiegati);
+            if (res != String.Empty) {
+                MessageBox.Show(res);
                 return;
             }
 
@@ -109,6 +87,7 @@ namespace Borelli_DatabaseForm {
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
         /*FINE TAB 2*/
+
 
 
         /*TAB 3*/
@@ -184,6 +163,15 @@ namespace Borelli_DatabaseForm {
             }
 
             return myAdapter;
+        }
+
+        private string CheckIfValidOperatorAndNumber(ComboBox cbOperatore, MaskedTextBox num) {
+            if (String.IsNullOrWhiteSpace(cbOperatore.Text) && !String.IsNullOrWhiteSpace(num.Text)) {
+                return "Inerire l'operatore matematico per confrontare il numero";
+            } else if (!String.IsNullOrWhiteSpace(cbOperatore.Text) && String.IsNullOrWhiteSpace(num.Text)) {;
+                return "Inserire un valore da confrontare";
+            }
+            return String.Empty;
         }
     }
 }
