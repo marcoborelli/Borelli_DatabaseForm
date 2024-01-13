@@ -83,6 +83,33 @@ namespace Borelli_DatabaseForm {
         }
         /*FINE TAB 1*/
 
+
+
+        /*TAB 2*/
+        private void bFiltraInImpiegati_Click(object sender, EventArgs e) {
+            if (String.IsNullOrWhiteSpace(cbSegnoStipendioInImpiegati.Text) && !String.IsNullOrWhiteSpace(mtbStipendioInImpiegati.Text)) {
+                MessageBox.Show("Inerire l'operatore matematico per confrontare lo stipendio");
+                return;
+            } else if (!String.IsNullOrWhiteSpace(cbSegnoStipendioInImpiegati.Text) && String.IsNullOrWhiteSpace(mtbStipendioInImpiegati.Text)) {
+                MessageBox.Show("Inserire uno stipendio da confrontare");
+                return;
+            }
+
+            string q = $"{GetBasicQuery(tabControl1.SelectedIndex)} WHERE impiegati.cognome LIKE '{tbCognomeInImpiegati.Text}%' AND dipartimenti.nome LIKE '{cbNomeDipartInImpiegati.Text}%'";
+
+            if (!String.IsNullOrWhiteSpace(cbSegnoStipendioInImpiegati.Text)) { //ora posso permettermi questo if in quanto sono sicuro che i dati siano validi
+                q += $" AND impiegati.stipendio {cbSegnoStipendioInImpiegati.Text} {mtbStipendioInImpiegati.Text}";
+            }
+
+            LoadDataOnSelectedTab(q);
+        }
+
+        private void bResetInImpiegati_Click(object sender, EventArgs e) {
+            tbCognomeInImpiegati.Text = cbSegnoStipendioInImpiegati.Text = mtbStipendioInImpiegati.Text = cbNomeDipartInImpiegati.Text = "";
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+        /*FINE TAB 2*/
+
         private string GetBasicQuery(int tabIndex) {
             string query = "";
 
