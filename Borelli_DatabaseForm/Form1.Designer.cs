@@ -266,6 +266,7 @@
             this.bResetInImpiegati.TabIndex = 11;
             this.bResetInImpiegati.Text = "RESET VALORI";
             this.bResetInImpiegati.UseVisualStyleBackColor = true;
+            this.bResetInImpiegati.Click += new System.EventHandler(this.bResetInImpiegati_Click);
             // 
             // bFiltraInImpiegati
             // 
@@ -275,6 +276,7 @@
             this.bFiltraInImpiegati.TabIndex = 10;
             this.bFiltraInImpiegati.Text = "FILTRA";
             this.bFiltraInImpiegati.UseVisualStyleBackColor = true;
+            this.bFiltraInImpiegati.Click += new System.EventHandler(this.bFiltraInImpiegati_Click);
             // 
             // cbNomeDipartInImpiegati
             // 

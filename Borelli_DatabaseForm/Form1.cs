@@ -104,6 +104,31 @@ namespace Borelli_DatabaseForm {
 
 
 
+        /*TAB 4*/
+        private void bFiltraInProgetti_Click(object sender, EventArgs e) {
+            string res = CheckIfValidOperatorAndNumber(cbSegnoBilancioInProgetti, mtbBilancioInProgetti);
+            if (res != String.Empty) {
+                MessageBox.Show(res);
+                return;
+            }
+
+            string q = $"{GetBasicQuery(tabControl1.SelectedIndex)} WHERE progetti.sigla LIKE '{tbSiglaInProgetti.Text}%' AND progetti.nome LIKE '{tbNomeInProgetti.Text}%' AND impiegati.cognome LIKE '{tbCognResponsInProgetti.Text}%'";
+
+            if (!String.IsNullOrWhiteSpace(cbSegnoBilancioInProgetti.Text)) { //ora posso permettermi questo if in quanto sono sicuro che i dati siano validi
+                q += $" AND impiegati.stipendio {cbSegnoBilancioInProgetti.Text} {mtbBilancioInProgetti.Text}";
+            }
+
+            LoadDataOnSelectedTab(q);
+        }
+
+        private void bResetInProgetti_Click(object sender, EventArgs e) {
+            tbSiglaInProgetti.Text = tbNomeInProgetti.Text = cbSegnoBilancioInProgetti.Text = mtbBilancioInProgetti.Text = tbCognResponsInProgetti.Text = "";
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+        /*FINE TAB 4*/
+
+
+
         private string GetBasicQuery(int tabIndex) {
             string query = "";
 
