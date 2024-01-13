@@ -3,6 +3,8 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Borelli_DatabaseForm {
     public partial class Form1 : Form {
@@ -49,6 +51,7 @@ namespace Borelli_DatabaseForm {
 
         private string[] tableName;
         private DataGridView[] gridsView;
+        bool isBasicQuery;
 
         public Form1() {
             InitializeComponent();
@@ -56,11 +59,15 @@ namespace Borelli_DatabaseForm {
             tableName = new string[] { "dipartimenti", "impiegati", "partecipazioni", "progetti" };
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewPartecipazioni, dataGridViewProgetti };
 
+            isBasicQuery = true;
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+            isBasicQuery = false;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
+            isBasicQuery = true;
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+            isBasicQuery = false;
         }
 
 
@@ -105,6 +112,17 @@ namespace Borelli_DatabaseForm {
             MyAdapter.Fill(dati);
 
             gridsView[tabControl1.SelectedIndex].DataSource = dati;
+
+            if (isBasicQuery) { //perche' le comboBox per filtrare prendono i dati della tabella ma se sono filtrati non ci sono tutti
+                switch (tabControl1.SelectedIndex) {
+                    case (int)eTabPages.Impiegati:
+                        cbNomeDipartInImpiegati.DisplayMember = "nome dipartimento";
+                        List<string> tmp = dati.AsEnumerable().Select(row => row.Field<string>("nome dipartimento")).ToList(); //non so che faccia, so che va
+                        tmp.Insert(0, ""); //opzione per non selezionare nulla
+                        cbNomeDipartInImpiegati.DataSource = tmp.Distinct().ToList();
+                        break;
+                }
+            }
         }
 
         private MySqlDataAdapter ExecQuery(string command) {
