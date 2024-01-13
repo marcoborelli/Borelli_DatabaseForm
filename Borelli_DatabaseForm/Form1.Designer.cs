@@ -400,6 +400,7 @@
             this.bResetInPartecipazioni.TabIndex = 6;
             this.bResetInPartecipazioni.Text = "RESET VALORI";
             this.bResetInPartecipazioni.UseVisualStyleBackColor = true;
+            this.bResetInPartecipazioni.Click += new System.EventHandler(this.bResetInPartecipazioni_Click);
             // 
             // bFiltraInPartecipazioni
             // 
@@ -409,6 +410,7 @@
             this.bFiltraInPartecipazioni.TabIndex = 5;
             this.bFiltraInPartecipazioni.Text = "FILTRA";
             this.bFiltraInPartecipazioni.UseVisualStyleBackColor = true;
+            this.bFiltraInPartecipazioni.Click += new System.EventHandler(this.bFiltraInPartecipazioni_Click);
             // 
             // tbCognomeInPartecipazioni
             // 

@@ -110,6 +110,21 @@ namespace Borelli_DatabaseForm {
         }
         /*FINE TAB 2*/
 
+
+        /*TAB 3*/
+        private void bFiltraInPartecipazioni_Click(object sender, EventArgs e) {
+            string q = $"{GetBasicQuery(tabControl1.SelectedIndex)} WHERE progetti.nome LIKE '{tbNomeProgInPartecipazioni.Text}%' AND impiegati.cognome LIKE '{tbCognomeInPartecipazioni.Text}%'";
+            LoadDataOnSelectedTab(q);
+        }
+
+        private void bResetInPartecipazioni_Click(object sender, EventArgs e) {
+            tbNomeProgInPartecipazioni.Text = tbCognomeInPartecipazioni.Text = String.Empty;
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+        /*FINE TAB 3*/
+
+
+
         private string GetBasicQuery(int tabIndex) {
             string query = "";
 
