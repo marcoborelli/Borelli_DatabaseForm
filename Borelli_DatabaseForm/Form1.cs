@@ -27,8 +27,8 @@ namespace Borelli_DatabaseForm {
         public enum eTabPages {
             Dipartimenti,
             Impiegati,
+            Progetti,
             Partecipazioni,
-            Progetti
         }
 
         private readonly DataGridView[] gridsView;
@@ -37,7 +37,7 @@ namespace Borelli_DatabaseForm {
         public Form1() {
             InitializeComponent();
 
-            gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewPartecipazioni, dataGridViewProgetti };
+            gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewProgetti, dataGridViewPartecipazioni };
 
             LoadBasicDataOnSelectedTab();
         }

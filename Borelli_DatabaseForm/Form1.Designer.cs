@@ -49,6 +49,22 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewImpiegati = new System.Windows.Forms.DataGridView();
+            this.tabPageProgetti = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.tbCognResponsInProgetti = new System.Windows.Forms.TextBox();
+            this.tbNomeInProgetti = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.mtbBilancioInProgetti = new System.Windows.Forms.MaskedTextBox();
+            this.bResetInProgetti = new System.Windows.Forms.Button();
+            this.bFiltraInProgetti = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cbSegnoBilancioInProgetti = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbSiglaInProgetti = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.dataGridViewProgetti = new System.Windows.Forms.DataGridView();
             this.tabPagePartecipazioni = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.bResetInPartecipazioni = new System.Windows.Forms.Button();
@@ -60,22 +76,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dataGridViewPartecipazioni = new System.Windows.Forms.DataGridView();
-            this.tabPageProgetti = new System.Windows.Forms.TabPage();
-            this.dataGridViewProgetti = new System.Windows.Forms.DataGridView();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.mtbBilancioInProgetti = new System.Windows.Forms.MaskedTextBox();
-            this.bResetInProgetti = new System.Windows.Forms.Button();
-            this.bFiltraInProgetti = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cbSegnoBilancioInProgetti = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbSiglaInProgetti = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.tbNomeInProgetti = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tbCognResponsInProgetti = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabDipartimenti.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -83,12 +83,12 @@
             this.tabPageImpiegati.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImpiegati)).BeginInit();
+            this.tabPageProgetti.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).BeginInit();
             this.tabPagePartecipazioni.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartecipazioni)).BeginInit();
-            this.tabPageProgetti.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).BeginInit();
-            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -98,8 +98,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabDipartimenti);
             this.tabControl1.Controls.Add(this.tabPageImpiegati);
-            this.tabControl1.Controls.Add(this.tabPagePartecipazioni);
             this.tabControl1.Controls.Add(this.tabPageProgetti);
+            this.tabControl1.Controls.Add(this.tabPagePartecipazioni);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -210,6 +210,8 @@
             this.dataGridViewDipartimenti.Name = "dataGridViewDipartimenti";
             this.dataGridViewDipartimenti.Size = new System.Drawing.Size(575, 413);
             this.dataGridViewDipartimenti.TabIndex = 0;
+            this.dataGridViewDipartimenti.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDipartimenti_CellDoubleClick);
+            this.dataGridViewDipartimenti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDipartimenti_CellEndEdit);
             // 
             // tabPageImpiegati
             // 
@@ -354,6 +356,165 @@
             this.dataGridViewImpiegati.Size = new System.Drawing.Size(575, 413);
             this.dataGridViewImpiegati.TabIndex = 1;
             // 
+            // tabPageProgetti
+            // 
+            this.tabPageProgetti.Controls.Add(this.panel7);
+            this.tabPageProgetti.Controls.Add(this.panel8);
+            this.tabPageProgetti.Controls.Add(this.dataGridViewProgetti);
+            this.tabPageProgetti.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProgetti.Name = "tabPageProgetti";
+            this.tabPageProgetti.Size = new System.Drawing.Size(793, 427);
+            this.tabPageProgetti.TabIndex = 2;
+            this.tabPageProgetti.Text = "PROGETTI";
+            this.tabPageProgetti.UseVisualStyleBackColor = true;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel7.Location = new System.Drawing.Point(3, 206);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(200, 210);
+            this.panel7.TabIndex = 5;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel8.Controls.Add(this.tbCognResponsInProgetti);
+            this.panel8.Controls.Add(this.tbNomeInProgetti);
+            this.panel8.Controls.Add(this.label15);
+            this.panel8.Controls.Add(this.mtbBilancioInProgetti);
+            this.panel8.Controls.Add(this.bResetInProgetti);
+            this.panel8.Controls.Add(this.bFiltraInProgetti);
+            this.panel8.Controls.Add(this.label11);
+            this.panel8.Controls.Add(this.cbSegnoBilancioInProgetti);
+            this.panel8.Controls.Add(this.label12);
+            this.panel8.Controls.Add(this.tbSiglaInProgetti);
+            this.panel8.Controls.Add(this.label13);
+            this.panel8.Controls.Add(this.label14);
+            this.panel8.Location = new System.Drawing.Point(3, 3);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(200, 197);
+            this.panel8.TabIndex = 4;
+            // 
+            // tbCognResponsInProgetti
+            // 
+            this.tbCognResponsInProgetti.Location = new System.Drawing.Point(70, 124);
+            this.tbCognResponsInProgetti.Name = "tbCognResponsInProgetti";
+            this.tbCognResponsInProgetti.Size = new System.Drawing.Size(127, 20);
+            this.tbCognResponsInProgetti.TabIndex = 14;
+            // 
+            // tbNomeInProgetti
+            // 
+            this.tbNomeInProgetti.Location = new System.Drawing.Point(70, 58);
+            this.tbNomeInProgetti.Name = "tbNomeInProgetti";
+            this.tbNomeInProgetti.Size = new System.Drawing.Size(127, 20);
+            this.tbNomeInProgetti.TabIndex = 13;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 61);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(38, 13);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Nome:";
+            // 
+            // mtbBilancioInProgetti
+            // 
+            this.mtbBilancioInProgetti.Location = new System.Drawing.Point(114, 89);
+            this.mtbBilancioInProgetti.Mask = "99999";
+            this.mtbBilancioInProgetti.Name = "mtbBilancioInProgetti";
+            this.mtbBilancioInProgetti.Size = new System.Drawing.Size(82, 20);
+            this.mtbBilancioInProgetti.TabIndex = 0;
+            this.mtbBilancioInProgetti.ValidatingType = typeof(int);
+            // 
+            // bResetInProgetti
+            // 
+            this.bResetInProgetti.Location = new System.Drawing.Point(5, 163);
+            this.bResetInProgetti.Name = "bResetInProgetti";
+            this.bResetInProgetti.Size = new System.Drawing.Size(110, 23);
+            this.bResetInProgetti.TabIndex = 11;
+            this.bResetInProgetti.Text = "RESET VALORI";
+            this.bResetInProgetti.UseVisualStyleBackColor = true;
+            this.bResetInProgetti.Click += new System.EventHandler(this.bResetInProgetti_Click);
+            // 
+            // bFiltraInProgetti
+            // 
+            this.bFiltraInProgetti.Location = new System.Drawing.Point(121, 163);
+            this.bFiltraInProgetti.Name = "bFiltraInProgetti";
+            this.bFiltraInProgetti.Size = new System.Drawing.Size(75, 23);
+            this.bFiltraInProgetti.TabIndex = 10;
+            this.bFiltraInProgetti.Text = "FILTRA";
+            this.bFiltraInProgetti.UseVisualStyleBackColor = true;
+            this.bFiltraInProgetti.Click += new System.EventHandler(this.bFiltraInProgetti_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 119);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 26);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Cognome\r\nresponsabile:";
+            // 
+            // cbSegnoBilancioInProgetti
+            // 
+            this.cbSegnoBilancioInProgetti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSegnoBilancioInProgetti.FormattingEnabled = true;
+            this.cbSegnoBilancioInProgetti.Items.AddRange(new object[] {
+            " ",
+            "<",
+            "<=",
+            "=",
+            ">=",
+            ">"});
+            this.cbSegnoBilancioInProgetti.Location = new System.Drawing.Point(70, 89);
+            this.cbSegnoBilancioInProgetti.Name = "cbSegnoBilancioInProgetti";
+            this.cbSegnoBilancioInProgetti.Size = new System.Drawing.Size(38, 21);
+            this.cbSegnoBilancioInProgetti.TabIndex = 7;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 92);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(44, 13);
+            this.label12.TabIndex = 5;
+            this.label12.Text = "Bilancio";
+            // 
+            // tbSiglaInProgetti
+            // 
+            this.tbSiglaInProgetti.Location = new System.Drawing.Point(70, 27);
+            this.tbSiglaInProgetti.Name = "tbSiglaInProgetti";
+            this.tbSiglaInProgetti.Size = new System.Drawing.Size(127, 20);
+            this.tbSiglaInProgetti.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 30);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(33, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Sigla:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 2);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(72, 13);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "FILTRA PER:";
+            // 
+            // dataGridViewProgetti
+            // 
+            this.dataGridViewProgetti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewProgetti.Location = new System.Drawing.Point(209, 3);
+            this.dataGridViewProgetti.Name = "dataGridViewProgetti";
+            this.dataGridViewProgetti.Size = new System.Drawing.Size(575, 413);
+            this.dataGridViewProgetti.TabIndex = 1;
+            // 
             // tabPagePartecipazioni
             // 
             this.tabPagePartecipazioni.Controls.Add(this.panel5);
@@ -458,165 +619,6 @@
             this.dataGridViewPartecipazioni.Size = new System.Drawing.Size(575, 413);
             this.dataGridViewPartecipazioni.TabIndex = 1;
             // 
-            // tabPageProgetti
-            // 
-            this.tabPageProgetti.Controls.Add(this.panel7);
-            this.tabPageProgetti.Controls.Add(this.panel8);
-            this.tabPageProgetti.Controls.Add(this.dataGridViewProgetti);
-            this.tabPageProgetti.Location = new System.Drawing.Point(4, 22);
-            this.tabPageProgetti.Name = "tabPageProgetti";
-            this.tabPageProgetti.Size = new System.Drawing.Size(793, 427);
-            this.tabPageProgetti.TabIndex = 2;
-            this.tabPageProgetti.Text = "PROGETTI";
-            this.tabPageProgetti.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewProgetti
-            // 
-            this.dataGridViewProgetti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewProgetti.Location = new System.Drawing.Point(209, 3);
-            this.dataGridViewProgetti.Name = "dataGridViewProgetti";
-            this.dataGridViewProgetti.Size = new System.Drawing.Size(575, 413);
-            this.dataGridViewProgetti.TabIndex = 1;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel7.Location = new System.Drawing.Point(3, 206);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(200, 210);
-            this.panel7.TabIndex = 5;
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel8.Controls.Add(this.tbCognResponsInProgetti);
-            this.panel8.Controls.Add(this.tbNomeInProgetti);
-            this.panel8.Controls.Add(this.label15);
-            this.panel8.Controls.Add(this.mtbBilancioInProgetti);
-            this.panel8.Controls.Add(this.bResetInProgetti);
-            this.panel8.Controls.Add(this.bFiltraInProgetti);
-            this.panel8.Controls.Add(this.label11);
-            this.panel8.Controls.Add(this.cbSegnoBilancioInProgetti);
-            this.panel8.Controls.Add(this.label12);
-            this.panel8.Controls.Add(this.tbSiglaInProgetti);
-            this.panel8.Controls.Add(this.label13);
-            this.panel8.Controls.Add(this.label14);
-            this.panel8.Location = new System.Drawing.Point(3, 3);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(200, 197);
-            this.panel8.TabIndex = 4;
-            // 
-            // mtbBilancioInProgetti
-            // 
-            this.mtbBilancioInProgetti.Location = new System.Drawing.Point(114, 89);
-            this.mtbBilancioInProgetti.Mask = "99999";
-            this.mtbBilancioInProgetti.Name = "mtbBilancioInProgetti";
-            this.mtbBilancioInProgetti.Size = new System.Drawing.Size(82, 20);
-            this.mtbBilancioInProgetti.TabIndex = 0;
-            this.mtbBilancioInProgetti.ValidatingType = typeof(int);
-            // 
-            // bResetInProgetti
-            // 
-            this.bResetInProgetti.Location = new System.Drawing.Point(5, 163);
-            this.bResetInProgetti.Name = "bResetInProgetti";
-            this.bResetInProgetti.Size = new System.Drawing.Size(110, 23);
-            this.bResetInProgetti.TabIndex = 11;
-            this.bResetInProgetti.Text = "RESET VALORI";
-            this.bResetInProgetti.UseVisualStyleBackColor = true;
-            this.bResetInProgetti.Click += new System.EventHandler(this.bResetInProgetti_Click);
-            // 
-            // bFiltraInProgetti
-            // 
-            this.bFiltraInProgetti.Location = new System.Drawing.Point(121, 163);
-            this.bFiltraInProgetti.Name = "bFiltraInProgetti";
-            this.bFiltraInProgetti.Size = new System.Drawing.Size(75, 23);
-            this.bFiltraInProgetti.TabIndex = 10;
-            this.bFiltraInProgetti.Text = "FILTRA";
-            this.bFiltraInProgetti.UseVisualStyleBackColor = true;
-            this.bFiltraInProgetti.Click += new System.EventHandler(this.bFiltraInProgetti_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 119);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(69, 26);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Cognome\r\nresponsabile:";
-            // 
-            // cbSegnoBilancioInProgetti
-            // 
-            this.cbSegnoBilancioInProgetti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSegnoBilancioInProgetti.FormattingEnabled = true;
-            this.cbSegnoBilancioInProgetti.Items.AddRange(new object[] {
-            " ",
-            "<",
-            "<=",
-            "=",
-            ">=",
-            ">"});
-            this.cbSegnoBilancioInProgetti.Location = new System.Drawing.Point(70, 89);
-            this.cbSegnoBilancioInProgetti.Name = "cbSegnoBilancioInProgetti";
-            this.cbSegnoBilancioInProgetti.Size = new System.Drawing.Size(38, 21);
-            this.cbSegnoBilancioInProgetti.TabIndex = 7;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 92);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 13);
-            this.label12.TabIndex = 5;
-            this.label12.Text = "Bilancio";
-            // 
-            // tbSiglaInProgetti
-            // 
-            this.tbSiglaInProgetti.Location = new System.Drawing.Point(70, 27);
-            this.tbSiglaInProgetti.Name = "tbSiglaInProgetti";
-            this.tbSiglaInProgetti.Size = new System.Drawing.Size(127, 20);
-            this.tbSiglaInProgetti.TabIndex = 4;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 30);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(33, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Sigla:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 2);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(72, 13);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "FILTRA PER:";
-            // 
-            // tbNomeInProgetti
-            // 
-            this.tbNomeInProgetti.Location = new System.Drawing.Point(70, 58);
-            this.tbNomeInProgetti.Name = "tbNomeInProgetti";
-            this.tbNomeInProgetti.Size = new System.Drawing.Size(127, 20);
-            this.tbNomeInProgetti.TabIndex = 13;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 61);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(38, 13);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Nome:";
-            // 
-            // tbCognResponsInProgetti
-            // 
-            this.tbCognResponsInProgetti.Location = new System.Drawing.Point(70, 124);
-            this.tbCognResponsInProgetti.Name = "tbCognResponsInProgetti";
-            this.tbCognResponsInProgetti.Size = new System.Drawing.Size(127, 20);
-            this.tbCognResponsInProgetti.TabIndex = 14;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -634,14 +636,14 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImpiegati)).EndInit();
+            this.tabPageProgetti.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).EndInit();
             this.tabPagePartecipazioni.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPartecipazioni)).EndInit();
-            this.tabPageProgetti.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
