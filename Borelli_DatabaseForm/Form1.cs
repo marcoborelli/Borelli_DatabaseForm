@@ -32,7 +32,6 @@ namespace Borelli_DatabaseForm {
         }
 
         private readonly DataGridView[] gridsView;
-        int cbElementCounterInImpiegati = -1;
 
         public Form1() {
             InitializeComponent();
@@ -170,15 +169,14 @@ namespace Borelli_DatabaseForm {
                     dati.Columns.Remove("cognome responsabile"); //la rimuovo perche' mi serviva nella combobox ma poi non la voglio vedere
                     break;
                 case (int)eTabPages.Impiegati:
-                    newCol = GetComboBoxColumn("nome dipartimento", "codice", dati.DefaultView.ToTable(true, "nome dipartimento", "codice"));
+                    DataTable tmp = dati.DefaultView.ToTable(true, "nome dipartimento", "codice");
+                    newCol = GetComboBoxColumn("nome dipartimento", "codice", tmp);
 
-                    if (cbElementCounterInImpiegati < newCol.Items.Count) { //comboBox nei filtri ricerca
-                        cbNomeDipartInImpiegati.DisplayMember = "nome dipartimento";
-                        cbNomeDipartInImpiegati.ValueMember = "codice";
-                        cbNomeDipartInImpiegati.DataSource = dati.DefaultView.ToTable(true, "nome dipartimento", "codice");
+                    DataRow dr = tmp.NewRow(); //cosi' da lasciare l'opzione vuouta nei filtri di ricerca
+                    dr[0] = dr[1] = "";
+                    tmp.Rows.InsertAt(dr, 0);
 
-                        cbElementCounterInImpiegati = newCol.Items.Count;
-                    }
+                    ChangeComboBoxIfSmaller(cbNomeDipartInImpiegati, tmp, "nome dipartimento", "codice");
 
                     dati.Columns.Remove("nome dipartimento");
                     break;
@@ -226,6 +224,14 @@ namespace Borelli_DatabaseForm {
             }
 
             return myAdapter;
+        }
+
+        public void ChangeComboBoxIfSmaller(ComboBox cb, DataTable data, string displMemb, string valMemb) {
+            if (cb.Items.Count < data.Rows.Count) { //comboBox nei filtri ricerca
+                cb.DisplayMember = displMemb;
+                cb.ValueMember = valMemb;
+                cb.DataSource = data;
+            }
         }
 
         private void ChangeComboBoxColumnIfSmaller(DataGridView dgv, params DataGridViewColumn[] nCol) {
