@@ -31,7 +31,7 @@ namespace Borelli_DatabaseForm {
             Progetti
         }
 
-        private DataGridView[] gridsView;
+        private readonly DataGridView[] gridsView;
         bool isBasicQuery;
 
         public Form1() {
@@ -130,7 +130,7 @@ namespace Borelli_DatabaseForm {
         private string GetBasicQuery(int tabIndex) {
             string query = "";
 
-            switch (tabControl1.SelectedIndex) {
+            switch (tabIndex) {
                 case (int)eTabPages.Dipartimenti:
                     query = "SELECT dipartimenti.codice, dipartimenti.nome, dipartimenti.sede, impiegati.matricola, impiegati.cognome AS 'cognome responsabile' FROM dipartimenti JOIN impiegati ON impiegati.matricola = dipartimenti.id_direttore";
                     break;
@@ -186,9 +186,9 @@ namespace Borelli_DatabaseForm {
 
                 MySqlCommand cmd = new MySqlCommand(command, SqlConnection);
                 cmd.ExecuteNonQuery();
-                myAdapter = new MySqlDataAdapter();
-                myAdapter.SelectCommand = cmd;
-
+                myAdapter = new MySqlDataAdapter {
+                    SelectCommand = cmd
+                };
                 SqlConnection.Close();
             } catch (Exception e) {
                 throw new Exception(e.Message);
