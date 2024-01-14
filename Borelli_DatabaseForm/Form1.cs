@@ -33,6 +33,7 @@ namespace Borelli_DatabaseForm {
 
         private readonly DataGridView[] gridsView;
         bool isBasicQuery;
+        int cbElementCounterInImpiegati = -1;
 
         public Form1() {
             InitializeComponent();
@@ -135,13 +136,13 @@ namespace Borelli_DatabaseForm {
                     query = "SELECT dipartimenti.codice, dipartimenti.nome, dipartimenti.sede, impiegati.matricola, impiegati.cognome AS 'cognome responsabile' FROM dipartimenti JOIN impiegati ON impiegati.matricola = dipartimenti.id_direttore";
                     break;
                 case (int)eTabPages.Impiegati:
-                    query = "SELECT impiegati.matricola, impiegati.cognome, impiegati.stipendio, dipartimenti.nome AS 'nome dipartimento' FROM dipartimenti JOIN impiegati ON impiegati.id_dipartimento = dipartimenti.codice";
-                    break;
-                case (int)eTabPages.Partecipazioni:
-                    query = "SELECT impiegati.matricola AS 'matricola impiegato', impiegati.cognome AS 'cognome impiegato', progetti.nome AS 'nome progetto' FROM (partecipazioni JOIN impiegati ON partecipazioni.id_impiegato = impiegati.matricola) JOIN progetti ON partecipazioni.id_progetto = progetti.sigla";
+                    query = "SELECT impiegati.matricola, impiegati.cognome, impiegati.stipendio, dipartimenti.codice, dipartimenti.nome AS 'nome dipartimento' FROM dipartimenti JOIN impiegati ON impiegati.id_dipartimento = dipartimenti.codice";
                     break;
                 case (int)eTabPages.Progetti:
-                    query = "SELECT progetti.sigla, progetti.nome, progetti.bilancio, impiegati.cognome AS 'cognome responsabile' FROM progetti JOIN impiegati ON progetti.id_responsabile = impiegati.matricola";
+                    query = "SELECT progetti.sigla, progetti.nome, progetti.bilancio, impiegati.matricola, impiegati.cognome AS 'cognome responsabile' FROM progetti JOIN impiegati ON progetti.id_responsabile = impiegati.matricola";
+                    break;
+                case (int)eTabPages.Partecipazioni:
+                    query = "SELECT impiegati.matricola, impiegati.cognome AS 'cognome impiegato', progetti.sigla, progetti.nome AS 'nome progetto' FROM (partecipazioni JOIN impiegati ON partecipazioni.id_impiegato = impiegati.matricola) JOIN progetti ON partecipazioni.id_progetto = progetti.sigla";
                     break;
                 default:
                     throw new Exception("Index non valido");
@@ -155,20 +156,49 @@ namespace Borelli_DatabaseForm {
             DataTable dati = new DataTable();
             MyAdapter.Fill(dati);
 
-            if (isBasicQuery) { //perche' le comboBox per filtrare prendono i dati della tabella ma se sono filtrati non ci sono tutti
-                switch (tabControl1.SelectedIndex) {
-                    case (int)eTabPages.Dipartimenti:
-                        dati.Columns.Remove("matricola");
-                        break;
-                    case (int)eTabPages.Impiegati:
+            DataGridViewComboBoxColumn newCol, newCol1 = null;
+
+            switch (tabControl1.SelectedIndex) {
+                case (int)eTabPages.Dipartimenti:
+                    newCol = GetComboBoxColumn("cognome responsabile", "matricola", dati.DefaultView.ToTable(true, "cognome responsabile", "matricola"));
+
+                    dati.Columns.Remove("cognome responsabile"); //la rimuovo perche' mi serviva nella combobox ma poi non la voglio vedere
+                    break;
+                case (int)eTabPages.Impiegati:
+                    newCol = GetComboBoxColumn("nome dipartimento", "codice", dati.DefaultView.ToTable(true, "nome dipartimento", "codice"));
+
+                    if (cbElementCounterInImpiegati < newCol.Items.Count) { //comboBox nei filtri ricerca
                         cbNomeDipartInImpiegati.DisplayMember = "nome dipartimento";
-                        List<string> tmp = dati.AsEnumerable().Select(row => row.Field<string>("nome dipartimento")).ToList(); //non so che faccia, so che va
-                        tmp.Insert(0, ""); //opzione per non selezionare nulla
-                        cbNomeDipartInImpiegati.DataSource = tmp.Distinct().ToList();
-                        break;
-                }
+                        cbNomeDipartInImpiegati.ValueMember = "codice";
+                        cbNomeDipartInImpiegati.DataSource = dati.DefaultView.ToTable(true, "nome dipartimento", "codice");
+
+                        cbElementCounterInImpiegati = newCol.Items.Count;
+                    }
+
+                    dati.Columns.Remove("nome dipartimento");
+                    break;
+                case (int)eTabPages.Progetti:
+                    DataTable datiImpiegatiTmp = new DataTable(); //perche' chiunque puo' essere capo
+                    ExecQuery("SELECT impiegati.matricola AS 'matricola', impiegati.cognome AS 'cognome responsabile' FROM impiegati").Fill(datiImpiegatiTmp);
+
+                    newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiImpiegatiTmp);
+
+                    dati.Columns.Remove("cognome responsabile");
+                    break;
+
+                case (int)eTabPages.Partecipazioni:
+                    newCol = GetComboBoxColumn("cognome impiegato", "matricola", dati.DefaultView.ToTable(true, "cognome impiegato", "matricola"));
+                    newCol1 = GetComboBoxColumn("nome progetto", "sigla", dati.DefaultView.ToTable(true, "nome progetto", "sigla"));
+
+                    dati.Columns.Remove("cognome impiegato");
+                    dati.Columns.Remove("nome progetto");
+                    break;
+                default:
+                    throw new Exception("Index non gestito");
             }
 
+
+            ChangeComboBoxColumnIfSmaller(gridsView[tabControl1.SelectedIndex], newCol, newCol1); //se ad esempio sto filtrando la ricera non voglio che la nuova comboBox non abbia certi nomi. In ogni caso li voglio tutti
             gridsView[tabControl1.SelectedIndex].DataSource = dati;
         }
 
@@ -197,6 +227,47 @@ namespace Borelli_DatabaseForm {
             return myAdapter;
         }
 
+        private void ChangeComboBoxColumnIfSmaller(DataGridView dgv, params DataGridViewColumn[] nCol) {
+            int cbColumnsIndex = 0;
+
+            List<DataGridViewColumn> newCol = nCol.ToList();
+            newCol.RemoveAll(elemento => elemento == null);
+
+            for (int i = 0; i < dgv.ColumnCount; i++) {
+                if (dgv.Columns[i].GetType() != typeof(DataGridViewComboBoxColumn))
+                    continue;
+
+                var oldCol = (DataGridViewComboBoxColumn)dgv.Columns[i];
+
+                DataGridViewComboBoxColumn[] tmpCol = new DataGridViewComboBoxColumn[newCol.Count];
+                for (int j = 0; j < newCol.Count; j++) {
+                    tmpCol[j] = (DataGridViewComboBoxColumn)newCol[j];
+                }
+
+                if (oldCol.Items.Count < tmpCol[cbColumnsIndex].Items.Count) {
+                    gridsView[tabControl1.SelectedIndex].Columns.RemoveAt(0);
+                    gridsView[tabControl1.SelectedIndex].Columns.Insert(0, newCol[cbColumnsIndex]);
+                }
+            }
+
+            if (dgv.ColumnCount == 0) {
+                for (int j = 0; j < newCol.Count; j++) {
+                    gridsView[tabControl1.SelectedIndex].Columns.Add(newCol[j]);
+                }
+            }
+        }
+
+        private DataGridViewComboBoxColumn GetComboBoxColumn(string toDisplay, string val, object src) {
+            DataGridViewComboBoxColumn col = new DataGridViewComboBoxColumn();
+
+            col.HeaderText = toDisplay;
+            col.DisplayMember = toDisplay;
+            col.ValueMember = val;
+            col.DataPropertyName = val;
+            col.DataSource = src;
+
+            return col;
+        }
         private string CheckIfValidOperatorAndNumber(ComboBox cbOperatore, MaskedTextBox num) {
             if (String.IsNullOrWhiteSpace(cbOperatore.Text) && !String.IsNullOrWhiteSpace(num.Text)) {
                 return "Inerire l'operatore matematico per confrontare il numero";
