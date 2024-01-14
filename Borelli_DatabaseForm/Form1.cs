@@ -39,15 +39,11 @@ namespace Borelli_DatabaseForm {
 
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewPartecipazioni, dataGridViewProgetti };
 
-            isBasicQuery = true;
-            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
-            isBasicQuery = false;
+            LoadBasicDataOnSelectedTab();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
-            isBasicQuery = true;
-            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
-            isBasicQuery = false;
+            LoadBasicDataOnSelectedTab();
         }
 
 
@@ -59,7 +55,7 @@ namespace Borelli_DatabaseForm {
 
         private void bResetIndipartimenti_Click(object sender, EventArgs e) {
             tbCognResponsInDipartimenti.Text = tbNomeCittaInDipartimenti.Text = String.Empty;
-            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+            LoadBasicDataOnSelectedTab();
         }
         /*FINE TAB 1*/
 
@@ -85,7 +81,7 @@ namespace Borelli_DatabaseForm {
         private void bResetInImpiegati_Click(object sender, EventArgs e) {
             tbCognomeInImpiegati.Text = mtbStipendioInImpiegati.Text = cbNomeDipartInImpiegati.Text = "";
             cbSegnoStipendioInImpiegati.SelectedIndex = 0;
-            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+            LoadBasicDataOnSelectedTab();
         }
         /*FINE TAB 2*/
 
@@ -99,7 +95,7 @@ namespace Borelli_DatabaseForm {
 
         private void bResetInPartecipazioni_Click(object sender, EventArgs e) {
             tbNomeProgInPartecipazioni.Text = tbCognomeInPartecipazioni.Text = String.Empty;
-            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+            LoadBasicDataOnSelectedTab();
         }
         /*FINE TAB 3*/
 
@@ -125,7 +121,7 @@ namespace Borelli_DatabaseForm {
         private void bResetInProgetti_Click(object sender, EventArgs e) {
             tbSiglaInProgetti.Text = tbNomeInProgetti.Text = mtbBilancioInProgetti.Text = tbCognResponsInProgetti.Text = "";
             cbSegnoBilancioInProgetti.SelectedIndex = 0;
-            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+            LoadBasicDataOnSelectedTab();
         }
         /*FINE TAB 4*/
 
@@ -174,6 +170,12 @@ namespace Borelli_DatabaseForm {
             }
 
             gridsView[tabControl1.SelectedIndex].DataSource = dati;
+        }
+
+        private void LoadBasicDataOnSelectedTab() {
+            isBasicQuery = true;
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+            isBasicQuery = false;
         }
 
         private MySqlDataAdapter ExecQuery(string command) {
