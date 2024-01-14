@@ -159,7 +159,10 @@ namespace Borelli_DatabaseForm {
 
             switch (tabControl1.SelectedIndex) {
                 case (int)eTabPages.Dipartimenti:
-                    newCol = GetComboBoxColumn("cognome responsabile", "matricola", dati.DefaultView.ToTable(true, "cognome responsabile", "matricola"));
+                    DataTable datiImpiegatiTmp = new DataTable();
+                    ExecQuery("SELECT impiegati.matricola AS 'matricola', impiegati.cognome AS 'cognome responsabile' FROM impiegati").Fill(datiImpiegatiTmp);
+
+                    newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiImpiegatiTmp);
 
                     dati.Columns.Remove("cognome responsabile"); //la rimuovo perche' mi serviva nella combobox ma poi non la voglio vedere
                     break;
@@ -177,7 +180,7 @@ namespace Borelli_DatabaseForm {
                     dati.Columns.Remove("nome dipartimento");
                     break;
                 case (int)eTabPages.Progetti:
-                    DataTable datiImpiegatiTmp = new DataTable(); //perche' chiunque puo' essere capo
+                    datiImpiegatiTmp = new DataTable(); //perche' chiunque puo' essere capo
                     ExecQuery("SELECT impiegati.matricola AS 'matricola', impiegati.cognome AS 'cognome responsabile' FROM impiegati").Fill(datiImpiegatiTmp);
 
                     newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiImpiegatiTmp);
