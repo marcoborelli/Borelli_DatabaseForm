@@ -32,7 +32,6 @@ namespace Borelli_DatabaseForm {
         }
 
         private readonly DataGridView[] gridsView;
-        bool isBasicQuery;
         int cbElementCounterInImpiegati = -1;
 
         public Form1() {
@@ -40,11 +39,11 @@ namespace Borelli_DatabaseForm {
 
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewProgetti, dataGridViewPartecipazioni };
 
-            LoadBasicDataOnSelectedTab();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
-            LoadBasicDataOnSelectedTab();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
 
@@ -56,7 +55,7 @@ namespace Borelli_DatabaseForm {
 
         private void bResetIndipartimenti_Click(object sender, EventArgs e) {
             tbCognResponsInDipartimenti.Text = tbNomeCittaInDipartimenti.Text = String.Empty;
-            LoadBasicDataOnSelectedTab();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
         /*FINE TAB 1*/
 
@@ -82,7 +81,7 @@ namespace Borelli_DatabaseForm {
         private void bResetInImpiegati_Click(object sender, EventArgs e) {
             tbCognomeInImpiegati.Text = mtbStipendioInImpiegati.Text = cbNomeDipartInImpiegati.Text = "";
             cbSegnoStipendioInImpiegati.SelectedIndex = 0;
-            LoadBasicDataOnSelectedTab();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
         /*FINE TAB 2*/
 
@@ -96,7 +95,7 @@ namespace Borelli_DatabaseForm {
 
         private void bResetInPartecipazioni_Click(object sender, EventArgs e) {
             tbNomeProgInPartecipazioni.Text = tbCognomeInPartecipazioni.Text = String.Empty;
-            LoadBasicDataOnSelectedTab();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
         /*FINE TAB 3*/
 
@@ -122,7 +121,7 @@ namespace Borelli_DatabaseForm {
         private void bResetInProgetti_Click(object sender, EventArgs e) {
             tbSiglaInProgetti.Text = tbNomeInProgetti.Text = mtbBilancioInProgetti.Text = tbCognResponsInProgetti.Text = "";
             cbSegnoBilancioInProgetti.SelectedIndex = 0;
-            LoadBasicDataOnSelectedTab();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
         /*FINE TAB 4*/
 
@@ -202,12 +201,6 @@ namespace Borelli_DatabaseForm {
             gridsView[tabControl1.SelectedIndex].DataSource = dati;
         }
 
-        private void LoadBasicDataOnSelectedTab() {
-            isBasicQuery = true;
-            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
-            isBasicQuery = false;
-        }
-
         private MySqlDataAdapter ExecQuery(string command) {
             MySqlDataAdapter myAdapter = null;
 
@@ -268,6 +261,7 @@ namespace Borelli_DatabaseForm {
 
             return col;
         }
+
         private string CheckIfValidOperatorAndNumber(ComboBox cbOperatore, MaskedTextBox num) {
             if (String.IsNullOrWhiteSpace(cbOperatore.Text) && !String.IsNullOrWhiteSpace(num.Text)) {
                 return "Inerire l'operatore matematico per confrontare il numero";
