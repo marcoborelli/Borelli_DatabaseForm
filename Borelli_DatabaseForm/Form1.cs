@@ -136,7 +136,7 @@ namespace Borelli_DatabaseForm {
 
             switch (tabControl1.SelectedIndex) {
                 case (int)eTabPages.Dipartimenti:
-                    query = "SELECT dipartimenti.codice, dipartimenti.nome, dipartimenti.sede, impiegati.cognome AS 'cognome responsabile' FROM dipartimenti JOIN impiegati ON impiegati.matricola = dipartimenti.id_direttore";
+                    query = "SELECT dipartimenti.codice, dipartimenti.nome, dipartimenti.sede, impiegati.matricola, impiegati.cognome AS 'cognome responsabile' FROM dipartimenti JOIN impiegati ON impiegati.matricola = dipartimenti.id_direttore";
                     break;
                 case (int)eTabPages.Impiegati:
                     query = "SELECT impiegati.matricola, impiegati.cognome, impiegati.stipendio, dipartimenti.nome AS 'nome dipartimento' FROM dipartimenti JOIN impiegati ON impiegati.id_dipartimento = dipartimenti.codice";
@@ -159,10 +159,11 @@ namespace Borelli_DatabaseForm {
             DataTable dati = new DataTable();
             MyAdapter.Fill(dati);
 
-            gridsView[tabControl1.SelectedIndex].DataSource = dati;
-
             if (isBasicQuery) { //perche' le comboBox per filtrare prendono i dati della tabella ma se sono filtrati non ci sono tutti
                 switch (tabControl1.SelectedIndex) {
+                    case (int)eTabPages.Dipartimenti:
+                        dati.Columns.Remove("matricola");
+                        break;
                     case (int)eTabPages.Impiegati:
                         cbNomeDipartInImpiegati.DisplayMember = "nome dipartimento";
                         List<string> tmp = dati.AsEnumerable().Select(row => row.Field<string>("nome dipartimento")).ToList(); //non so che faccia, so che va
@@ -171,6 +172,8 @@ namespace Borelli_DatabaseForm {
                         break;
                 }
             }
+
+            gridsView[tabControl1.SelectedIndex].DataSource = dati;
         }
 
         private MySqlDataAdapter ExecQuery(string command) {
