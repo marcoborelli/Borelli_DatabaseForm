@@ -834,6 +834,7 @@
             this.bAggiungiRecInImpiegati.TabIndex = 25;
             this.bAggiungiRecInImpiegati.Text = "AGGIUNGI RECORD";
             this.bAggiungiRecInImpiegati.UseVisualStyleBackColor = true;
+            this.bAggiungiRecInImpiegati.Click += new System.EventHandler(this.bAggiungiRecInImpiegati_Click);
             // 
             // Form1
             // 

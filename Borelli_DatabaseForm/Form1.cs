@@ -71,6 +71,7 @@ namespace Borelli_DatabaseForm {
                 MessageBox.Show("Inserire dei dati validi");
                 return;
             }
+
             string q = $"INSERT INTO dipartimenti (codice, nome, sede, id_direttore) VALUES ('{tbInsCodiceInDipartimenti.Text.ToUpper()}', '{tbInsNomeDipartInDipartimenti.Text}', '{tbInssedeInDipartimenti.Text}', '{cbInsCognRespoInDipartimenti.SelectedValue}');";
             ExecQuery(q);
 
@@ -115,6 +116,24 @@ namespace Borelli_DatabaseForm {
             tbCognomeInImpiegati.Text = mtbStipendioInImpiegati.Text = cbNomeDipartInImpiegati.Text = "";
             cbSegnoStipendioInImpiegati.SelectedIndex = 0;
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+
+        private void bAggiungiRecInImpiegati_Click(object sender, EventArgs e) {
+            if (!CheckIfValidStrings(tbInsMatricolaInImpiegati.Text, tbInsCognomeInImpiegati.Text, mtbInsStipendioInImpiegati.Text)) {
+                MessageBox.Show("Inserire dei dati validi");
+                return;
+            }
+
+            string q = $"INSERT INTO impiegati (matricola, cognome, stipendio, id_dipartimento) VALUES ('{tbInsMatricolaInImpiegati.Text}', '{tbInsCognomeInImpiegati.Text}', '{mtbInsStipendioInImpiegati.Text}', '{cbInsNomeDipartInImpiegati.SelectedValue}');";
+            ExecQuery(q);
+
+            ResetInsertFieldInImpiegati();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+
+        private void ResetInsertFieldInImpiegati() {
+            tbInsMatricolaInImpiegati.Text = tbInsCognomeInImpiegati.Text = mtbInsStipendioInImpiegati.Text = String.Empty;
+            cbInsNomeDipartInImpiegati.SelectedIndex = 0;
         }
         /*FINE TAB 2*/
 
