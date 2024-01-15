@@ -131,6 +131,13 @@ namespace Borelli_DatabaseForm {
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
+        private void dataGridViewImpiegati_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+            var tmpRow = dataGridViewImpiegati.Rows[rowIndexToModify];
+            string q = $"UPDATE impiegati SET matricola = '{tmpRow.Cells[0].Value}', cognome = '{tmpRow.Cells[1].Value}', stipendio = '{tmpRow.Cells[2].Value}', id_dipartimento = '{tmpRow.Cells[3].Value}' WHERE impiegati.matricola = '{bckPk}'";
+            ExecQuery(q);
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+
         private void ResetInsertFieldInImpiegati() {
             tbInsMatricolaInImpiegati.Text = tbInsCognomeInImpiegati.Text = mtbInsStipendioInImpiegati.Text = String.Empty;
             cbInsNomeDipartInImpiegati.SelectedIndex = 0;

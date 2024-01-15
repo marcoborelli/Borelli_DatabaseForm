@@ -483,6 +483,7 @@
             this.dataGridViewImpiegati.Name = "dataGridViewImpiegati";
             this.dataGridViewImpiegati.Size = new System.Drawing.Size(575, 413);
             this.dataGridViewImpiegati.TabIndex = 1;
+            this.dataGridViewImpiegati.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewImpiegati_CellEndEdit);
             // 
             // tabPageProgetti
             // 
