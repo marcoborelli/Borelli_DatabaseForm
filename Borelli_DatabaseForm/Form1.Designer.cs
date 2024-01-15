@@ -96,6 +96,16 @@
             this.label25 = new System.Windows.Forms.Label();
             this.mtbInsStipendioInImpiegati = new System.Windows.Forms.MaskedTextBox();
             this.bAggiungiRecInImpiegati = new System.Windows.Forms.Button();
+            this.cbInsCognResponsInProgetti = new System.Windows.Forms.ComboBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tbInsNomeInProgetti = new System.Windows.Forms.TextBox();
+            this.tbInsSiglaInProgetti = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.bAggiungiRecInProgetti = new System.Windows.Forms.Button();
+            this.mtbInsBilancioInProgetti = new System.Windows.Forms.MaskedTextBox();
             this.tabControl1.SuspendLayout();
             this.tabDipartimenti.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -106,6 +116,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImpiegati)).BeginInit();
             this.tabPageProgetti.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).BeginInit();
             this.tabPagePartecipazioni.SuspendLayout();
@@ -500,6 +511,16 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel7.Controls.Add(this.mtbInsBilancioInProgetti);
+            this.panel7.Controls.Add(this.bAggiungiRecInProgetti);
+            this.panel7.Controls.Add(this.cbInsCognResponsInProgetti);
+            this.panel7.Controls.Add(this.label26);
+            this.panel7.Controls.Add(this.label27);
+            this.panel7.Controls.Add(this.tbInsNomeInProgetti);
+            this.panel7.Controls.Add(this.tbInsSiglaInProgetti);
+            this.panel7.Controls.Add(this.label28);
+            this.panel7.Controls.Add(this.label29);
+            this.panel7.Controls.Add(this.label30);
             this.panel7.Location = new System.Drawing.Point(3, 206);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(200, 210);
@@ -837,6 +858,92 @@
             this.bAggiungiRecInImpiegati.UseVisualStyleBackColor = true;
             this.bAggiungiRecInImpiegati.Click += new System.EventHandler(this.bAggiungiRecInImpiegati_Click);
             // 
+            // cbInsCognResponsInProgetti
+            // 
+            this.cbInsCognResponsInProgetti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbInsCognResponsInProgetti.FormattingEnabled = true;
+            this.cbInsCognResponsInProgetti.Location = new System.Drawing.Point(68, 151);
+            this.cbInsCognResponsInProgetti.Name = "cbInsCognResponsInProgetti";
+            this.cbInsCognResponsInProgetti.Size = new System.Drawing.Size(126, 21);
+            this.cbInsCognResponsInProgetti.TabIndex = 23;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(1, 149);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(69, 26);
+            this.label26.TabIndex = 22;
+            this.label26.Text = "Cognome\r\nresponsabile:";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(3, 115);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(47, 13);
+            this.label27.TabIndex = 20;
+            this.label27.Text = "Bilancio:";
+            // 
+            // tbInsNomeInProgetti
+            // 
+            this.tbInsNomeInProgetti.Location = new System.Drawing.Point(68, 73);
+            this.tbInsNomeInProgetti.Name = "tbInsNomeInProgetti";
+            this.tbInsNomeInProgetti.Size = new System.Drawing.Size(127, 20);
+            this.tbInsNomeInProgetti.TabIndex = 19;
+            // 
+            // tbInsSiglaInProgetti
+            // 
+            this.tbInsSiglaInProgetti.Location = new System.Drawing.Point(68, 34);
+            this.tbInsSiglaInProgetti.Name = "tbInsSiglaInProgetti";
+            this.tbInsSiglaInProgetti.Size = new System.Drawing.Size(127, 20);
+            this.tbInsSiglaInProgetti.TabIndex = 18;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(1, 3);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(131, 13);
+            this.label28.TabIndex = 15;
+            this.label28.Text = "MODIFICA STRUTTURA:";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(3, 76);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(38, 13);
+            this.label29.TabIndex = 17;
+            this.label29.Text = "Nome:";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(1, 37);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(56, 13);
+            this.label30.TabIndex = 16;
+            this.label30.Text = "Sigla [PK]:";
+            // 
+            // bAggiungiRecInProgetti
+            // 
+            this.bAggiungiRecInProgetti.Location = new System.Drawing.Point(3, 184);
+            this.bAggiungiRecInProgetti.Name = "bAggiungiRecInProgetti";
+            this.bAggiungiRecInProgetti.Size = new System.Drawing.Size(191, 23);
+            this.bAggiungiRecInProgetti.TabIndex = 24;
+            this.bAggiungiRecInProgetti.Text = "AGGIUNGI RECORD";
+            this.bAggiungiRecInProgetti.UseVisualStyleBackColor = true;
+            // 
+            // mtbInsBilancioInProgetti
+            // 
+            this.mtbInsBilancioInProgetti.Location = new System.Drawing.Point(68, 115);
+            this.mtbInsBilancioInProgetti.Mask = "99999";
+            this.mtbInsBilancioInProgetti.Name = "mtbInsBilancioInProgetti";
+            this.mtbInsBilancioInProgetti.Size = new System.Drawing.Size(126, 20);
+            this.mtbInsBilancioInProgetti.TabIndex = 15;
+            this.mtbInsBilancioInProgetti.ValidatingType = typeof(int);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -860,6 +967,8 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImpiegati)).EndInit();
             this.tabPageProgetti.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProgetti)).EndInit();
@@ -946,6 +1055,16 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.MaskedTextBox mtbInsStipendioInImpiegati;
         private System.Windows.Forms.Button bAggiungiRecInImpiegati;
+        private System.Windows.Forms.MaskedTextBox mtbInsBilancioInProgetti;
+        private System.Windows.Forms.Button bAggiungiRecInProgetti;
+        private System.Windows.Forms.ComboBox cbInsCognResponsInProgetti;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox tbInsNomeInProgetti;
+        private System.Windows.Forms.TextBox tbInsSiglaInProgetti;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
     }
 }
 

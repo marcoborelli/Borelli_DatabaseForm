@@ -247,6 +247,8 @@ namespace Borelli_DatabaseForm {
 
                     newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiImpiegatiTmp);
 
+                    ChangeComboBoxIfSmaller(cbInsCognResponsInProgetti, datiImpiegatiTmp, "cognome responsabile", "matricola");
+
                     dati.Columns.Remove("cognome responsabile");
                     break;
 
