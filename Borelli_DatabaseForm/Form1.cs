@@ -59,6 +59,23 @@ namespace Borelli_DatabaseForm {
             tbCognResponsInDipartimenti.Text = tbNomeCittaInDipartimenti.Text = String.Empty;
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
+
+        private void bAggiungiInDipartimenti_Click(object sender, EventArgs e) {
+            if (String.IsNullOrWhiteSpace(tbInsCodiceInDipartimenti.Text) || String.IsNullOrWhiteSpace(tbInsNomeDipartInDipartimenti.Text) || String.IsNullOrWhiteSpace(tbInssedeInDipartimenti.Text)) {
+                MessageBox.Show("Inserire dei dati validi");
+                return;
+            }
+            string q = $"INSERT INTO dipartimenti (codice, nome, sede, id_direttore) VALUES ('{tbInsCodiceInDipartimenti.Text.ToUpper()}', '{tbInsNomeDipartInDipartimenti.Text}', '{tbInssedeInDipartimenti.Text}', '{cbInsCognRespoInDipartimenti.SelectedValue}');";
+            ExecQuery(q);
+
+            ResetInsertFieldInDipartimenti();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+
+        private void ResetInsertFieldInDipartimenti() {
+            tbInsCodiceInDipartimenti.Text = tbInsNomeDipartInDipartimenti.Text = tbInssedeInDipartimenti.Text = String.Empty;
+            cbInsCognRespoInDipartimenti.SelectedIndex = 0;
+        }
         /*FINE TAB 1*/
 
 

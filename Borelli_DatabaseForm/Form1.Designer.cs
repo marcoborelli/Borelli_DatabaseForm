@@ -232,6 +232,7 @@
             this.bAggiungiRecInDipartimenti.TabIndex = 15;
             this.bAggiungiRecInDipartimenti.Text = "AGGIUNGI RECORD";
             this.bAggiungiRecInDipartimenti.UseVisualStyleBackColor = true;
+            this.bAggiungiRecInDipartimenti.Click += new System.EventHandler(this.bAggiungiInDipartimenti_Click);
             // 
             // cbInsCognRespoInDipartimenti
             // 
