@@ -156,6 +156,24 @@ namespace Borelli_DatabaseForm {
             tbNomeProgInPartecipazioni.Text = tbCognomeInPartecipazioni.Text = String.Empty;
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
+
+        private void bAggiungiRecInProgetti_Click(object sender, EventArgs e) {
+            if (!CheckIfValidStrings(tbInsSiglaInProgetti.Text, tbInsNomeInProgetti.Text, mtbInsBilancioInProgetti.Text)) {
+                MessageBox.Show("Inserire dei dati validi");
+                return;
+            }
+
+            string q = $"INSERT INTO progetti (sigla, nome, bilancio, id_responsabile) VALUES ('{tbInsSiglaInProgetti.Text}', '{tbInsNomeInProgetti.Text}', '{mtbInsBilancioInProgetti.Text}', '{cbInsCognResponsInProgetti.SelectedValue}');";
+            ExecQuery(q);
+
+            ResetInsertFieldInProgetti();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+
+        private void ResetInsertFieldInProgetti() {
+            tbInsSiglaInProgetti.Text = tbInsNomeInProgetti.Text = mtbInsBilancioInProgetti.Text = String.Empty;
+            cbInsCognResponsInProgetti.SelectedIndex = 0;
+        }
         /*FINE TAB 3*/
 
 

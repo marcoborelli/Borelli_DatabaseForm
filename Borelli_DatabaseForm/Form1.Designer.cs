@@ -934,6 +934,7 @@
             this.bAggiungiRecInProgetti.TabIndex = 24;
             this.bAggiungiRecInProgetti.Text = "AGGIUNGI RECORD";
             this.bAggiungiRecInProgetti.UseVisualStyleBackColor = true;
+            this.bAggiungiRecInProgetti.Click += new System.EventHandler(this.bAggiungiRecInProgetti_Click);
             // 
             // mtbInsBilancioInProgetti
             // 
