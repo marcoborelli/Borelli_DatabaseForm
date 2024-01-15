@@ -311,6 +311,7 @@
             // 
             // dataGridViewDipartimenti
             // 
+            this.dataGridViewDipartimenti.AllowUserToAddRows = false;
             this.dataGridViewDipartimenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDipartimenti.Location = new System.Drawing.Point(209, 3);
             this.dataGridViewDipartimenti.Name = "dataGridViewDipartimenti";
@@ -455,6 +456,7 @@
             // 
             // dataGridViewImpiegati
             // 
+            this.dataGridViewImpiegati.AllowUserToAddRows = false;
             this.dataGridViewImpiegati.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewImpiegati.Location = new System.Drawing.Point(209, 3);
             this.dataGridViewImpiegati.Name = "dataGridViewImpiegati";
@@ -614,6 +616,7 @@
             // 
             // dataGridViewProgetti
             // 
+            this.dataGridViewProgetti.AllowUserToAddRows = false;
             this.dataGridViewProgetti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewProgetti.Location = new System.Drawing.Point(209, 3);
             this.dataGridViewProgetti.Name = "dataGridViewProgetti";
@@ -718,6 +721,7 @@
             // 
             // dataGridViewPartecipazioni
             // 
+            this.dataGridViewPartecipazioni.AllowUserToAddRows = false;
             this.dataGridViewPartecipazioni.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPartecipazioni.Location = new System.Drawing.Point(209, 3);
             this.dataGridViewPartecipazioni.Name = "dataGridViewPartecipazioni";
