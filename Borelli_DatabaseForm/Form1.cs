@@ -39,6 +39,9 @@ namespace Borelli_DatabaseForm {
 
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewProgetti, dataGridViewPartecipazioni };
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
@@ -199,9 +202,11 @@ namespace Borelli_DatabaseForm {
                     throw new Exception("Index non gestito");
             }
 
+            dataGridViewDipartimenti.BeginInvoke(new Action(() => { //perche' senno' se si sta modificando una cella da' eccezione
+                ChangeComboBoxColumnIfSmaller(gridsView[tabControl1.SelectedIndex], newCol, newCol1); //se ad esempio sto filtrando la ricera non voglio che la nuova comboBox non abbia certi nomi. In ogni caso li voglio tutti
+                gridsView[tabControl1.SelectedIndex].DataSource = dati;
+            }));
 
-            ChangeComboBoxColumnIfSmaller(gridsView[tabControl1.SelectedIndex], newCol, newCol1); //se ad esempio sto filtrando la ricera non voglio che la nuova comboBox non abbia certi nomi. In ogni caso li voglio tutti
-            gridsView[tabControl1.SelectedIndex].DataSource = dati;
         }
 
         private MySqlDataAdapter ExecQuery(string command) {
