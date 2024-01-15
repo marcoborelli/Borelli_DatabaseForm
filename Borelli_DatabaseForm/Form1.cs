@@ -67,7 +67,7 @@ namespace Borelli_DatabaseForm {
         }
 
         private void bAggiungiInDipartimenti_Click(object sender, EventArgs e) {
-            if (String.IsNullOrWhiteSpace(tbInsCodiceInDipartimenti.Text) || String.IsNullOrWhiteSpace(tbInsNomeDipartInDipartimenti.Text) || String.IsNullOrWhiteSpace(tbInssedeInDipartimenti.Text)) {
+            if (!CheckIfValidStrings(tbInsCodiceInDipartimenti.Text, tbInsNomeDipartInDipartimenti.Text, tbInssedeInDipartimenti.Text)) {
                 MessageBox.Show("Inserire dei dati validi");
                 return;
             }
@@ -324,6 +324,16 @@ namespace Borelli_DatabaseForm {
                 return "Inserire un valore da confrontare";
             }
             return String.Empty;
+        }
+
+        private bool CheckIfValidStrings(params string[] values) {
+            for (int i = 0; i < values.Length; i++) {
+                if (String.IsNullOrEmpty(values[i]) || String.IsNullOrWhiteSpace(values[i])) {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
