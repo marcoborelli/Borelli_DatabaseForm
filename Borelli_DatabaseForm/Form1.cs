@@ -170,6 +170,13 @@ namespace Borelli_DatabaseForm {
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
+        private void dataGridViewProgetti_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+            var tmpRow = dataGridViewProgetti.Rows[rowIndexToModify];
+            string q = $"UPDATE progetti SET sigla = '{tmpRow.Cells[0].Value}', nome = '{tmpRow.Cells[1].Value}', bilancio = '{tmpRow.Cells[2].Value}', id_responsabile = '{tmpRow.Cells[3].Value}' WHERE progetti.sigla = '{bckPk}'";
+            ExecQuery(q);
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+
         private void ResetInsertFieldInProgetti() {
             tbInsSiglaInProgetti.Text = tbInsNomeInProgetti.Text = mtbInsBilancioInProgetti.Text = String.Empty;
             cbInsCognResponsInProgetti.SelectedIndex = 0;

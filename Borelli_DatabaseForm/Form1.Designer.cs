@@ -665,6 +665,7 @@
             this.dataGridViewProgetti.Name = "dataGridViewProgetti";
             this.dataGridViewProgetti.Size = new System.Drawing.Size(575, 413);
             this.dataGridViewProgetti.TabIndex = 1;
+            this.dataGridViewProgetti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProgetti_CellEndEdit);
             // 
             // tabPagePartecipazioni
             // 
