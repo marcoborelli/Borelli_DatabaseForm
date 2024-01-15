@@ -205,6 +205,8 @@ namespace Borelli_DatabaseForm {
                     DataTable tmp = dati.DefaultView.ToTable(true, "nome dipartimento", "codice");
                     newCol = GetComboBoxColumn("nome dipartimento", "codice", tmp);
 
+                    ChangeComboBoxIfSmaller(cbInsNomeDipartInImpiegati, tmp, "nome dipartimento", "codice"); //lo inserisco prima perche' qui non voglio ci sia lo spazio vuoto
+
                     DataRow dr = tmp.NewRow(); //cosi' da lasciare l'opzione vuouta nei filtri di ricerca
                     dr[0] = dr[1] = "";
                     tmp.Rows.InsertAt(dr, 0);

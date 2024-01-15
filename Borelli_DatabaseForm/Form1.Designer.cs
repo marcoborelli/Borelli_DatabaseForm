@@ -86,12 +86,23 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dataGridViewPartecipazioni = new System.Windows.Forms.DataGridView();
+            this.cbInsNomeDipartInImpiegati = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.tbInsCognomeInImpiegati = new System.Windows.Forms.TextBox();
+            this.tbInsMatricolaInImpiegati = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.mtbInsStipendioInImpiegati = new System.Windows.Forms.MaskedTextBox();
+            this.bAggiungiRecInImpiegati = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabDipartimenti.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDipartimenti)).BeginInit();
             this.tabPageImpiegati.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImpiegati)).BeginInit();
             this.tabPageProgetti.SuspendLayout();
@@ -334,7 +345,17 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel4.Location = new System.Drawing.Point(3, 177);
+            this.panel4.Controls.Add(this.bAggiungiRecInImpiegati);
+            this.panel4.Controls.Add(this.mtbInsStipendioInImpiegati);
+            this.panel4.Controls.Add(this.cbInsNomeDipartInImpiegati);
+            this.panel4.Controls.Add(this.label21);
+            this.panel4.Controls.Add(this.label22);
+            this.panel4.Controls.Add(this.tbInsCognomeInImpiegati);
+            this.panel4.Controls.Add(this.tbInsMatricolaInImpiegati);
+            this.panel4.Controls.Add(this.label23);
+            this.panel4.Controls.Add(this.label24);
+            this.panel4.Controls.Add(this.label25);
+            this.panel4.Location = new System.Drawing.Point(5, 180);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 239);
             this.panel4.TabIndex = 3;
@@ -728,6 +749,92 @@
             this.dataGridViewPartecipazioni.Size = new System.Drawing.Size(575, 413);
             this.dataGridViewPartecipazioni.TabIndex = 1;
             // 
+            // cbInsNomeDipartInImpiegati
+            // 
+            this.cbInsNomeDipartInImpiegati.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbInsNomeDipartInImpiegati.FormattingEnabled = true;
+            this.cbInsNomeDipartInImpiegati.Location = new System.Drawing.Point(70, 150);
+            this.cbInsNomeDipartInImpiegati.Name = "cbInsNomeDipartInImpiegati";
+            this.cbInsNomeDipartInImpiegati.Size = new System.Drawing.Size(126, 21);
+            this.cbInsNomeDipartInImpiegati.TabIndex = 23;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(3, 147);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(67, 26);
+            this.label21.TabIndex = 22;
+            this.label21.Text = "Nome\r\ndipartimento:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(3, 114);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(54, 13);
+            this.label22.TabIndex = 20;
+            this.label22.Text = "Stipendio:";
+            // 
+            // tbInsCognomeInImpiegati
+            // 
+            this.tbInsCognomeInImpiegati.Location = new System.Drawing.Point(70, 72);
+            this.tbInsCognomeInImpiegati.Name = "tbInsCognomeInImpiegati";
+            this.tbInsCognomeInImpiegati.Size = new System.Drawing.Size(127, 20);
+            this.tbInsCognomeInImpiegati.TabIndex = 19;
+            // 
+            // tbInsMatricolaInImpiegati
+            // 
+            this.tbInsMatricolaInImpiegati.Location = new System.Drawing.Point(70, 33);
+            this.tbInsMatricolaInImpiegati.Name = "tbInsMatricolaInImpiegati";
+            this.tbInsMatricolaInImpiegati.Size = new System.Drawing.Size(127, 20);
+            this.tbInsMatricolaInImpiegati.TabIndex = 18;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(3, 2);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(131, 13);
+            this.label23.TabIndex = 15;
+            this.label23.Text = "MODIFICA STRUTTURA:";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(3, 76);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(55, 13);
+            this.label24.TabIndex = 17;
+            this.label24.Text = "Cognome:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(3, 29);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(50, 26);
+            this.label25.TabIndex = 16;
+            this.label25.Text = "Matricola\r\n[PK]:";
+            // 
+            // mtbInsStipendioInImpiegati
+            // 
+            this.mtbInsStipendioInImpiegati.Location = new System.Drawing.Point(70, 111);
+            this.mtbInsStipendioInImpiegati.Mask = "99999";
+            this.mtbInsStipendioInImpiegati.Name = "mtbInsStipendioInImpiegati";
+            this.mtbInsStipendioInImpiegati.Size = new System.Drawing.Size(128, 20);
+            this.mtbInsStipendioInImpiegati.TabIndex = 24;
+            this.mtbInsStipendioInImpiegati.ValidatingType = typeof(int);
+            // 
+            // bAggiungiRecInImpiegati
+            // 
+            this.bAggiungiRecInImpiegati.Location = new System.Drawing.Point(5, 213);
+            this.bAggiungiRecInImpiegati.Name = "bAggiungiRecInImpiegati";
+            this.bAggiungiRecInImpiegati.Size = new System.Drawing.Size(191, 23);
+            this.bAggiungiRecInImpiegati.TabIndex = 25;
+            this.bAggiungiRecInImpiegati.Text = "AGGIUNGI RECORD";
+            this.bAggiungiRecInImpiegati.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -745,6 +852,8 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDipartimenti)).EndInit();
             this.tabPageImpiegati.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImpiegati)).EndInit();
@@ -825,6 +934,16 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox cbInsNomeDipartInImpiegati;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox tbInsCognomeInImpiegati;
+        private System.Windows.Forms.TextBox tbInsMatricolaInImpiegati;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.MaskedTextBox mtbInsStipendioInImpiegati;
+        private System.Windows.Forms.Button bAggiungiRecInImpiegati;
     }
 }
 
