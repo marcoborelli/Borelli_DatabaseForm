@@ -78,6 +78,14 @@ namespace Borelli_DatabaseForm {
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
+        private void dataGridViewDipartimenti_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+            var tmpRow = dataGridViewDipartimenti.Rows[rowIndexToModify];
+            string q = $"UPDATE dipartimenti SET codice = '{tmpRow.Cells[0].Value}', nome = '{tmpRow.Cells[1].Value}', sede = '{tmpRow.Cells[2].Value}', id_direttore = '{tmpRow.Cells[3].Value}' WHERE dipartimenti.codice = '{bckPk}'";
+            ExecQuery(q);
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+
+        }
+
         private void ResetInsertFieldInDipartimenti() {
             tbInsCodiceInDipartimenti.Text = tbInsNomeDipartInDipartimenti.Text = tbInssedeInDipartimenti.Text = String.Empty;
             cbInsCognRespoInDipartimenti.SelectedIndex = 0;

@@ -316,7 +316,6 @@
             this.dataGridViewDipartimenti.Name = "dataGridViewDipartimenti";
             this.dataGridViewDipartimenti.Size = new System.Drawing.Size(575, 413);
             this.dataGridViewDipartimenti.TabIndex = 0;
-            this.dataGridViewDipartimenti.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDipartimenti_CellDoubleClick);
             this.dataGridViewDipartimenti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDipartimenti_CellEndEdit);
             // 
             // tabPageImpiegati
