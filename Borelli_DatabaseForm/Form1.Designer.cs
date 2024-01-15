@@ -34,6 +34,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bAggiungiRecInDipartimenti = new System.Windows.Forms.Button();
+            this.cbInsCognRespoInDipartimenti = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbInssedeInDipartimenti = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tbInsNomeDipartInDipartimenti = new System.Windows.Forms.TextBox();
+            this.tbInsCodiceInDipartimenti = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.dataGridViewDipartimenti = new System.Windows.Forms.DataGridView();
             this.tabPageImpiegati = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -79,6 +89,7 @@
             this.tabControl1.SuspendLayout();
             this.tabDipartimenti.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDipartimenti)).BeginInit();
             this.tabPageImpiegati.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -198,10 +209,104 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.bAggiungiRecInDipartimenti);
+            this.panel1.Controls.Add(this.cbInsCognRespoInDipartimenti);
+            this.panel1.Controls.Add(this.label20);
+            this.panel1.Controls.Add(this.tbInssedeInDipartimenti);
+            this.panel1.Controls.Add(this.label19);
+            this.panel1.Controls.Add(this.tbInsNomeDipartInDipartimenti);
+            this.panel1.Controls.Add(this.tbInsCodiceInDipartimenti);
+            this.panel1.Controls.Add(this.label16);
+            this.panel1.Controls.Add(this.label17);
+            this.panel1.Controls.Add(this.label18);
             this.panel1.Location = new System.Drawing.Point(3, 142);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 274);
             this.panel1.TabIndex = 1;
+            // 
+            // bAggiungiRecInDipartimenti
+            // 
+            this.bAggiungiRecInDipartimenti.Location = new System.Drawing.Point(5, 248);
+            this.bAggiungiRecInDipartimenti.Name = "bAggiungiRecInDipartimenti";
+            this.bAggiungiRecInDipartimenti.Size = new System.Drawing.Size(191, 23);
+            this.bAggiungiRecInDipartimenti.TabIndex = 15;
+            this.bAggiungiRecInDipartimenti.Text = "AGGIUNGI RECORD";
+            this.bAggiungiRecInDipartimenti.UseVisualStyleBackColor = true;
+            // 
+            // cbInsCognRespoInDipartimenti
+            // 
+            this.cbInsCognRespoInDipartimenti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbInsCognRespoInDipartimenti.FormattingEnabled = true;
+            this.cbInsCognRespoInDipartimenti.Location = new System.Drawing.Point(70, 150);
+            this.cbInsCognRespoInDipartimenti.Name = "cbInsCognRespoInDipartimenti";
+            this.cbInsCognRespoInDipartimenti.Size = new System.Drawing.Size(126, 21);
+            this.cbInsCognRespoInDipartimenti.TabIndex = 14;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(3, 148);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(69, 26);
+            this.label20.TabIndex = 13;
+            this.label20.Text = "Cognome\r\nresponsabile:";
+            // 
+            // tbInssedeInDipartimenti
+            // 
+            this.tbInssedeInDipartimenti.Location = new System.Drawing.Point(70, 111);
+            this.tbInssedeInDipartimenti.Name = "tbInssedeInDipartimenti";
+            this.tbInssedeInDipartimenti.Size = new System.Drawing.Size(127, 20);
+            this.tbInssedeInDipartimenti.TabIndex = 12;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(3, 114);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(35, 13);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "Sede:";
+            // 
+            // tbInsNomeDipartInDipartimenti
+            // 
+            this.tbInsNomeDipartInDipartimenti.Location = new System.Drawing.Point(70, 72);
+            this.tbInsNomeDipartInDipartimenti.Name = "tbInsNomeDipartInDipartimenti";
+            this.tbInsNomeDipartInDipartimenti.Size = new System.Drawing.Size(127, 20);
+            this.tbInsNomeDipartInDipartimenti.TabIndex = 10;
+            // 
+            // tbInsCodiceInDipartimenti
+            // 
+            this.tbInsCodiceInDipartimenti.Location = new System.Drawing.Point(70, 33);
+            this.tbInsCodiceInDipartimenti.Name = "tbInsCodiceInDipartimenti";
+            this.tbInsCodiceInDipartimenti.Size = new System.Drawing.Size(127, 20);
+            this.tbInsCodiceInDipartimenti.TabIndex = 9;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 2);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(131, 13);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "MODIFICA STRUTTURA:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 67);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(67, 26);
+            this.label17.TabIndex = 8;
+            this.label17.Text = "Nome\r\ndipartimento:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(3, 36);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(66, 13);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "Codice [PK]:";
             // 
             // dataGridViewDipartimenti
             // 
@@ -632,6 +737,8 @@
             this.tabDipartimenti.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDipartimenti)).EndInit();
             this.tabPageImpiegati.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -704,6 +811,16 @@
         private System.Windows.Forms.TextBox tbSiglaInProgetti;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button bAggiungiRecInDipartimenti;
+        private System.Windows.Forms.ComboBox cbInsCognRespoInDipartimenti;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox tbInssedeInDipartimenti;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox tbInsNomeDipartInDipartimenti;
+        private System.Windows.Forms.TextBox tbInsCodiceInDipartimenti;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }
 

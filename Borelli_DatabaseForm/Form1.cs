@@ -166,6 +166,8 @@ namespace Borelli_DatabaseForm {
 
                     newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiImpiegatiTmp);
 
+                    ChangeComboBoxIfSmaller(cbInsCognRespoInDipartimenti, datiImpiegatiTmp, "cognome responsabile", "matricola");
+
                     dati.Columns.Remove("cognome responsabile"); //la rimuovo perche' mi serviva nella combobox ma poi non la voglio vedere
                     break;
                 case (int)eTabPages.Impiegati:
