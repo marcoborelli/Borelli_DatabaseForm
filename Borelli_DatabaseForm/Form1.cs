@@ -33,11 +33,17 @@ namespace Borelli_DatabaseForm {
 
         private readonly DataGridView[] gridsView;
 
+        string bckPk = "";
+        int rowIndexToModify = -1;
+
         public Form1() {
             InitializeComponent();
 
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewProgetti, dataGridViewPartecipazioni };
 
+            for (int i = 0; i < gridsView.Length; i++) {
+                gridsView[i].CellBeginEdit += gridsView_CellBeginEdit;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -223,7 +229,13 @@ namespace Borelli_DatabaseForm {
                 ChangeComboBoxColumnIfSmaller(gridsView[tabControl1.SelectedIndex], newCol, newCol1); //se ad esempio sto filtrando la ricera non voglio che la nuova comboBox non abbia certi nomi. In ogni caso li voglio tutti
                 gridsView[tabControl1.SelectedIndex].DataSource = dati;
             }));
+        }
 
+        private void gridsView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
+            rowIndexToModify = gridsView[tabControl1.SelectedIndex].SelectedCells[0].RowIndex;
+            bckPk = gridsView[tabControl1.SelectedIndex].Rows[rowIndexToModify].Cells[0].Value.ToString();
+
+            gridsView[tabControl1.SelectedIndex].ClearSelection();
         }
 
         private MySqlDataAdapter ExecQuery(string command) {
