@@ -33,8 +33,8 @@ namespace Borelli_DatabaseForm {
 
         private readonly DataGridView[] gridsView;
 
-        string bckPk = "";
-        int rowIndexToModify = -1;
+        DataGridViewRow oldRow = null;
+        int oldRowIndex = -1;
 
         public Form1() {
             InitializeComponent();
@@ -80,8 +80,13 @@ namespace Borelli_DatabaseForm {
         }
 
         private void dataGridViewDipartimenti_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            var tmpRow = dataGridViewDipartimenti.Rows[rowIndexToModify];
-            string q = $"UPDATE dipartimenti SET codice = '{tmpRow.Cells[0].Value}', nome = '{tmpRow.Cells[1].Value}', sede = '{tmpRow.Cells[2].Value}', id_direttore = '{tmpRow.Cells[3].Value}' WHERE dipartimenti.codice = '{bckPk}'";
+            var newRow = dataGridViewDipartimenti.Rows[oldRowIndex];
+
+            if (newRow.Equals(oldRow)) {
+                return;
+            }
+
+            string q = $"UPDATE dipartimenti SET codice = '{newRow.Cells[0].Value}', nome = '{newRow.Cells[1].Value}', sede = '{newRow.Cells[2].Value}', id_direttore = '{newRow.Cells[3].Value}' WHERE dipartimenti.codice = '{oldRow.Cells[0].Value}'";
             ExecQuery(q);
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
 
@@ -132,8 +137,13 @@ namespace Borelli_DatabaseForm {
         }
 
         private void dataGridViewImpiegati_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            var tmpRow = dataGridViewImpiegati.Rows[rowIndexToModify];
-            string q = $"UPDATE impiegati SET matricola = '{tmpRow.Cells[0].Value}', cognome = '{tmpRow.Cells[1].Value}', stipendio = '{tmpRow.Cells[2].Value}', id_dipartimento = '{tmpRow.Cells[3].Value}' WHERE impiegati.matricola = '{bckPk}'";
+            var newRow = dataGridViewImpiegati.Rows[oldRowIndex];
+
+            if (newRow.Equals(oldRow)) {
+                return;
+            }
+
+            string q = $"UPDATE impiegati SET matricola = '{newRow.Cells[0].Value}', cognome = '{newRow.Cells[1].Value}', stipendio = '{newRow.Cells[2].Value}', id_dipartimento = '{newRow.Cells[3].Value}' WHERE impiegati.matricola = '{oldRow.Cells[0].Value}'";
             ExecQuery(q);
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
@@ -171,8 +181,13 @@ namespace Borelli_DatabaseForm {
         }
 
         private void dataGridViewProgetti_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            var tmpRow = dataGridViewProgetti.Rows[rowIndexToModify];
-            string q = $"UPDATE progetti SET sigla = '{tmpRow.Cells[0].Value}', nome = '{tmpRow.Cells[1].Value}', bilancio = '{tmpRow.Cells[2].Value}', id_responsabile = '{tmpRow.Cells[3].Value}' WHERE progetti.sigla = '{bckPk}'";
+            var newRow = dataGridViewProgetti.Rows[oldRowIndex];
+
+            if (newRow.Equals(oldRow)) {
+                return;
+            }
+
+            string q = $"UPDATE progetti SET sigla = '{newRow.Cells[0].Value}', nome = '{newRow.Cells[1].Value}', bilancio = '{newRow.Cells[2].Value}', id_responsabile = '{newRow.Cells[3].Value}' WHERE progetti.sigla = '{oldRow.Cells[0].Value}'";
             ExecQuery(q);
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
@@ -295,8 +310,8 @@ namespace Borelli_DatabaseForm {
         }
 
         private void gridsView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
-            rowIndexToModify = gridsView[tabControl1.SelectedIndex].SelectedCells[0].RowIndex;
-            bckPk = gridsView[tabControl1.SelectedIndex].Rows[rowIndexToModify].Cells[0].Value.ToString();
+            oldRowIndex = gridsView[tabControl1.SelectedIndex].SelectedCells[0].RowIndex;
+            oldRow = CloneRow(gridsView[tabControl1.SelectedIndex].Rows[oldRowIndex]);
 
             gridsView[tabControl1.SelectedIndex].ClearSelection();
         }
@@ -387,6 +402,16 @@ namespace Borelli_DatabaseForm {
             }
 
             return true;
+        }
+
+        public DataGridViewRow CloneRow(DataGridViewRow row) {
+            DataGridViewRow clonedRow = (DataGridViewRow)row.Clone();
+
+            for (int index = 0; index < row.Cells.Count; index++) {
+                clonedRow.Cells[index].Value = row.Cells[index].Value;
+            }
+
+            return clonedRow;
         }
     }
 }
