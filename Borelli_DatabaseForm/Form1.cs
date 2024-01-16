@@ -282,54 +282,50 @@ namespace Borelli_DatabaseForm {
             MyAdapter.Fill(dati);
 
             DataGridViewComboBoxColumn newCol, newCol1 = null;
+            DataTable datiTmp = new DataTable();
 
             switch (tabControl1.SelectedIndex) {
                 case (int)eTabPages.Dipartimenti:
-                    DataTable datiImpiegatiTmp = new DataTable();
-                    ExecQuery("SELECT impiegati.matricola AS 'matricola', impiegati.cognome AS 'cognome responsabile' FROM impiegati").Fill(datiImpiegatiTmp);
+                    ExecQuery("SELECT impiegati.matricola AS 'matricola', impiegati.cognome AS 'cognome responsabile' FROM impiegati").Fill(datiTmp); //perche' chiunque volendo puo' essere responsabile e con la query di base vedrei solo quelli che gia' lo sono
 
-                    newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiImpiegatiTmp);
-
-                    ChangeComboBoxIfSmaller(cbInsCognRespoInDipartimenti, datiImpiegatiTmp, "cognome responsabile", "matricola");
+                    newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiTmp);
+                    ChangeComboBoxIfSmaller(cbInsCognRespoInDipartimenti, datiTmp, "cognome responsabile", "matricola");
 
                     dati.Columns.Remove("cognome responsabile"); //la rimuovo perche' mi serviva nella combobox ma poi non la voglio vedere
                     break;
                 case (int)eTabPages.Impiegati:
-                    DataTable tmp = dati.DefaultView.ToTable(true, "nome dipartimento", "codice");
-                    newCol = GetComboBoxColumn("nome dipartimento", "codice", tmp);
+                    datiTmp = dati.DefaultView.ToTable(true, "nome dipartimento", "codice");
+                    newCol = GetComboBoxColumn("nome dipartimento", "codice", datiTmp);
 
-                    ChangeComboBoxIfSmaller(cbInsNomeDipartInImpiegati, tmp, "nome dipartimento", "codice"); //lo inserisco prima perche' qui non voglio ci sia lo spazio vuoto
+                    ChangeComboBoxIfSmaller(cbInsNomeDipartInImpiegati, datiTmp, "nome dipartimento", "codice");
 
-                    DataRow dr = tmp.NewRow(); //cosi' da lasciare l'opzione vuouta nei filtri di ricerca
+                    DataRow dr = datiTmp.NewRow(); //cosi' da lasciare l'opzione vuouta nei filtri di ricerca se non si volesse filtrare per nome di dipartimento
                     dr[0] = dr[1] = "";
-                    tmp.Rows.InsertAt(dr, 0);
+                    datiTmp.Rows.InsertAt(dr, 0);
 
-                    ChangeComboBoxIfSmaller(cbNomeDipartInImpiegati, tmp, "nome dipartimento", "codice");
+                    ChangeComboBoxIfSmaller(cbNomeDipartInImpiegati, datiTmp, "nome dipartimento", "codice");
 
                     dati.Columns.Remove("nome dipartimento");
                     break;
                 case (int)eTabPages.Progetti:
-                    datiImpiegatiTmp = new DataTable(); //perche' chiunque puo' essere capo
-                    ExecQuery("SELECT impiegati.matricola AS 'matricola', impiegati.cognome AS 'cognome responsabile' FROM impiegati").Fill(datiImpiegatiTmp);
+                    ExecQuery("SELECT impiegati.matricola AS 'matricola', impiegati.cognome AS 'cognome responsabile' FROM impiegati").Fill(datiTmp); //perche' chiunque puo' essere capo
 
-                    newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiImpiegatiTmp);
-
-                    ChangeComboBoxIfSmaller(cbInsCognResponsInProgetti, datiImpiegatiTmp, "cognome responsabile", "matricola");
+                    newCol = GetComboBoxColumn("cognome responsabile", "matricola", datiTmp);
+                    ChangeComboBoxIfSmaller(cbInsCognResponsInProgetti, datiTmp, "cognome responsabile", "matricola");
 
                     dati.Columns.Remove("cognome responsabile");
                     break;
 
                 case (int)eTabPages.Partecipazioni:
-                    datiImpiegatiTmp = new DataTable();
-                    ExecQuery("SELECT impiegati.matricola, impiegati.cognome FROM impiegati").Fill(datiImpiegatiTmp);
-                    ChangeComboBoxIfSmaller(cbInsCognImpiegInPartecipazioni, datiImpiegatiTmp, "cognome", "matricola");
+                    ExecQuery("SELECT impiegati.matricola, impiegati.cognome AS 'cognome impiegato' FROM impiegati").Fill(datiTmp);
+                    ChangeComboBoxIfSmaller(cbInsCognImpiegInPartecipazioni, datiTmp, "cognome impiegato", "matricola"); //chiunque può unirsi a un progetto
+                    newCol = GetComboBoxColumn("cognome impiegato", "matricola", datiTmp);
 
-                    DataTable datiDipartimentiTmp = new DataTable();
-                    ExecQuery("SELECT progetti.sigla, progetti.nome FROM progetti").Fill(datiDipartimentiTmp);
-                    ChangeComboBoxIfSmaller(cbInsNomeProgettoInPartecipazioni, datiDipartimentiTmp, "nome", "sigla");
+                    datiTmp.Reset();
 
-                    newCol = GetComboBoxColumn("cognome impiegato", "matricola", dati.DefaultView.ToTable(true, "cognome impiegato", "matricola"));
-                    newCol1 = GetComboBoxColumn("nome progetto", "sigla", dati.DefaultView.ToTable(true, "nome progetto", "sigla"));
+                    ExecQuery("SELECT progetti.sigla, progetti.nome AS 'nome progetto' FROM progetti").Fill(datiTmp);
+                    ChangeComboBoxIfSmaller(cbInsNomeProgettoInPartecipazioni, datiTmp, "nome progetto", "sigla");
+                    newCol1 = GetComboBoxColumn("nome progetto", "sigla", datiTmp);
 
                     dati.Columns.Remove("cognome impiegato");
                     dati.Columns.Remove("nome progetto");
@@ -374,55 +370,51 @@ namespace Borelli_DatabaseForm {
             if (cb.Items.Count < data.Rows.Count) { //comboBox nei filtri ricerca
                 cb.DisplayMember = displMemb;
                 cb.ValueMember = valMemb;
-                cb.DataSource = data;
+                cb.DataSource = CloneDataTable(data);
             }
         }
 
-        private void ChangeComboBoxColumnIfSmaller(DataGridView dgv, params DataGridViewColumn[] nCol) {
+        private void ChangeComboBoxColumnIfSmaller(DataGridView dgv, params DataGridViewComboBoxColumn[] newColumns) {
             int cbColumnsIndex = 0;
 
-            List<DataGridViewColumn> newCol = nCol.ToList();
-            newCol.RemoveAll(elemento => elemento == null);
+            List<DataGridViewComboBoxColumn> newCol = newColumns.ToList(); //converto in lista per usare lambda function per rimuovere possibili elementi nulli
+            newCol.RemoveAll(elemento => elemento == null); //perche' in certe tabelle ci sono 2 colonne comboBox, in altre una sola
 
             for (int i = 0; i < dgv.ColumnCount; i++) {
                 if (dgv.Columns[i].GetType() != typeof(DataGridViewComboBoxColumn))
                     continue;
 
+
                 var oldCol = (DataGridViewComboBoxColumn)dgv.Columns[i];
 
-                DataGridViewComboBoxColumn[] tmpCol = new DataGridViewComboBoxColumn[newCol.Count];
-                for (int j = 0; j < newCol.Count; j++) {
-                    tmpCol[j] = (DataGridViewComboBoxColumn)newCol[j];
-                }
-
-                if (oldCol.Items.Count < tmpCol[cbColumnsIndex].Items.Count) {
-                    gridsView[tabControl1.SelectedIndex].Columns.RemoveAt(0);
-                    gridsView[tabControl1.SelectedIndex].Columns.Insert(0, newCol[cbColumnsIndex]);
+                if (oldCol.Items.Count < newCol[cbColumnsIndex].Items.Count) {
+                    dgv.Columns.RemoveAt(0);
+                    dgv.Columns.Insert(0, newCol[cbColumnsIndex]);
                 }
             }
 
-            if (dgv.ColumnCount == 0) {
+            if (dgv.ColumnCount == 0) { //se la tabella e' nuova e non ha colonne
                 for (int j = 0; j < newCol.Count; j++) {
-                    gridsView[tabControl1.SelectedIndex].Columns.Add(newCol[j]);
+                    dgv.Columns.Add(newCol[j]);
                 }
             }
         }
 
-        private DataGridViewComboBoxColumn GetComboBoxColumn(string toDisplay, string val, object src) {
-            DataGridViewComboBoxColumn col = new DataGridViewComboBoxColumn();
-
-            col.HeaderText = toDisplay;
-            col.DisplayMember = toDisplay;
-            col.ValueMember = val;
-            col.DataPropertyName = val;
-            col.DataSource = src;
+        private DataGridViewComboBoxColumn GetComboBoxColumn(string toDisplay, string val, DataTable src) {
+            DataGridViewComboBoxColumn col = new DataGridViewComboBoxColumn {
+                HeaderText = toDisplay,
+                DisplayMember = toDisplay,
+                ValueMember = val,
+                DataPropertyName = val,
+                DataSource = CloneDataTable(src)
+            };
 
             return col;
         }
 
         private string CheckIfValidOperatorAndNumber(ComboBox cbOperatore, MaskedTextBox num) {
             if (String.IsNullOrWhiteSpace(cbOperatore.Text) && !String.IsNullOrWhiteSpace(num.Text)) {
-                return "Inerire l'operatore matematico per confrontare il numero";
+                return "Inserire l'operatore matematico per confrontare il numero";
             } else if (!String.IsNullOrWhiteSpace(cbOperatore.Text) && String.IsNullOrWhiteSpace(num.Text)) {
                 return "Inserire un valore da confrontare";
             }
@@ -448,6 +440,8 @@ namespace Borelli_DatabaseForm {
 
             return clonedRow;
         }
+
+        public DataTable CloneDataTable(DataTable dataTable) => dataTable.Copy();
 
         private string GetDatabaseConnectionRow(string fileName) {
             if (!File.Exists(fileName)) {
