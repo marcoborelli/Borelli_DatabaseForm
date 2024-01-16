@@ -32,14 +32,23 @@ namespace Borelli_DatabaseForm {
             Partecipazioni,
         }
 
+        public struct sRecordInfo {
+            public DataGridViewRow Row;
+            public int RowIndex;
+        }
+
         private readonly DataGridView[] gridsView;
 
         readonly string filename;
-        DataGridViewRow oldRow = null;
-        int oldRowIndex = -1;
+        sRecordInfo oldRecordInfo;
 
         public Form1() {
             InitializeComponent();
+
+            oldRecordInfo = new sRecordInfo {
+                Row = null,
+                RowIndex = -1
+            };
 
             filename = "dbinfo";
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewProgetti, dataGridViewPartecipazioni };
@@ -83,13 +92,13 @@ namespace Borelli_DatabaseForm {
         }
 
         private void dataGridViewDipartimenti_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            var newRow = dataGridViewDipartimenti.Rows[oldRowIndex];
+            var newRow = dataGridViewDipartimenti.Rows[oldRecordInfo.RowIndex];
 
-            if (newRow.Equals(oldRow)) {
+            if (newRow.Equals(oldRecordInfo.Row)) {
                 return;
             }
 
-            string q = $"UPDATE dipartimenti SET codice = '{newRow.Cells[0].Value}', nome = '{newRow.Cells[1].Value}', sede = '{newRow.Cells[2].Value}', id_direttore = '{newRow.Cells[3].Value}' WHERE dipartimenti.codice = '{oldRow.Cells[0].Value}'";
+            string q = $"UPDATE dipartimenti SET codice = '{newRow.Cells[0].Value}', nome = '{newRow.Cells[1].Value}', sede = '{newRow.Cells[2].Value}', id_direttore = '{newRow.Cells[3].Value}' WHERE dipartimenti.codice = '{oldRecordInfo.Row.Cells[0].Value}'";
             ExecQuery(q);
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
 
@@ -140,13 +149,13 @@ namespace Borelli_DatabaseForm {
         }
 
         private void dataGridViewImpiegati_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            var newRow = dataGridViewImpiegati.Rows[oldRowIndex];
+            var newRow = dataGridViewImpiegati.Rows[oldRecordInfo.RowIndex];
 
-            if (newRow.Equals(oldRow)) {
+            if (newRow.Equals(oldRecordInfo.Row)) {
                 return;
             }
 
-            string q = $"UPDATE impiegati SET matricola = '{newRow.Cells[0].Value}', cognome = '{newRow.Cells[1].Value}', stipendio = '{newRow.Cells[2].Value}', id_dipartimento = '{newRow.Cells[3].Value}' WHERE impiegati.matricola = '{oldRow.Cells[0].Value}'";
+            string q = $"UPDATE impiegati SET matricola = '{newRow.Cells[0].Value}', cognome = '{newRow.Cells[1].Value}', stipendio = '{newRow.Cells[2].Value}', id_dipartimento = '{newRow.Cells[3].Value}' WHERE impiegati.matricola = '{oldRecordInfo.Row.Cells[0].Value}'";
             ExecQuery(q);
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
@@ -184,13 +193,13 @@ namespace Borelli_DatabaseForm {
         }
 
         private void dataGridViewProgetti_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            var newRow = dataGridViewProgetti.Rows[oldRowIndex];
+            var newRow = dataGridViewProgetti.Rows[oldRecordInfo.RowIndex];
 
-            if (newRow.Equals(oldRow)) {
+            if (newRow.Equals(oldRecordInfo.Row)) {
                 return;
             }
 
-            string q = $"UPDATE progetti SET sigla = '{newRow.Cells[0].Value}', nome = '{newRow.Cells[1].Value}', bilancio = '{newRow.Cells[2].Value}', id_responsabile = '{newRow.Cells[3].Value}' WHERE progetti.sigla = '{oldRow.Cells[0].Value}'";
+            string q = $"UPDATE progetti SET sigla = '{newRow.Cells[0].Value}', nome = '{newRow.Cells[1].Value}', bilancio = '{newRow.Cells[2].Value}', id_responsabile = '{newRow.Cells[3].Value}' WHERE progetti.sigla = '{oldRecordInfo.Row.Cells[0].Value}'";
             ExecQuery(q);
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
@@ -235,13 +244,13 @@ namespace Borelli_DatabaseForm {
         }
 
         private void dataGridViewPartecipazioni_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            var newRow = dataGridViewPartecipazioni.Rows[oldRowIndex];
+            var newRow = dataGridViewPartecipazioni.Rows[oldRecordInfo.RowIndex];
 
-            if (newRow.Equals(oldRow)) {
+            if (newRow.Equals(oldRecordInfo.Row)) {
                 return;
             }
 
-            string q = $"UPDATE partecipazioni SET id_impiegato = '{newRow.Cells[0].Value}', id_progetto = '{newRow.Cells[1].Value}' WHERE partecipazioni.id_impiegato = '{oldRow.Cells[0].Value}' AND partecipazioni.id_progetto = '{oldRow.Cells[1].Value}'";
+            string q = $"UPDATE partecipazioni SET id_impiegato = '{newRow.Cells[0].Value}', id_progetto = '{newRow.Cells[1].Value}' WHERE partecipazioni.id_impiegato = '{oldRecordInfo.Row.Cells[0].Value}' AND partecipazioni.id_progetto = '{oldRecordInfo.Row.Cells[1].Value}'";
             ExecQuery(q);
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
@@ -341,8 +350,8 @@ namespace Borelli_DatabaseForm {
         }
 
         private void gridsView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
-            oldRowIndex = gridsView[tabControl1.SelectedIndex].SelectedCells[0].RowIndex;
-            oldRow = CloneRow(gridsView[tabControl1.SelectedIndex].Rows[oldRowIndex]);
+            oldRecordInfo.RowIndex = gridsView[tabControl1.SelectedIndex].SelectedCells[0].RowIndex;
+            oldRecordInfo.Row = CloneRow(gridsView[tabControl1.SelectedIndex].Rows[oldRecordInfo.RowIndex]);
 
             gridsView[tabControl1.SelectedIndex].ClearSelection();
         }
