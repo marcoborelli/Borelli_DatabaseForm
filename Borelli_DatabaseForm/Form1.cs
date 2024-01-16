@@ -231,6 +231,18 @@ namespace Borelli_DatabaseForm {
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
 
+        private void dataGridViewPartecipazioni_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+            var newRow = dataGridViewPartecipazioni.Rows[oldRowIndex];
+
+            if (newRow.Equals(oldRow)) {
+                return;
+            }
+
+            string q = $"UPDATE partecipazioni SET id_impiegato = '{newRow.Cells[0].Value}', id_progetto = '{newRow.Cells[1].Value}' WHERE partecipazioni.id_impiegato = '{oldRow.Cells[0].Value}' AND partecipazioni.id_progetto = '{oldRow.Cells[1].Value}'";
+            ExecQuery(q);
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+
         private void ResetInsertFieldInPartecipazioni() {
             cbInsCognImpiegInPartecipazioni.SelectedIndex = cbInsNomeProgettoInPartecipazioni.SelectedIndex = 0;
         }

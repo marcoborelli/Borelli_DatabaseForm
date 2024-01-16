@@ -1013,6 +1013,7 @@
             this.dataGridViewPartecipazioni.Name = "dataGridViewPartecipazioni";
             this.dataGridViewPartecipazioni.Size = new System.Drawing.Size(575, 413);
             this.dataGridViewPartecipazioni.TabIndex = 1;
+            this.dataGridViewPartecipazioni.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPartecipazioni_CellEndEdit);
             // 
             // Form1
             // 
