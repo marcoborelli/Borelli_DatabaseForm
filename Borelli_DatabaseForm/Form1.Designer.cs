@@ -958,6 +958,7 @@
             this.bAggiungiRecInPartecipazioni.TabIndex = 30;
             this.bAggiungiRecInPartecipazioni.Text = "AGGIUNGI RECORD";
             this.bAggiungiRecInPartecipazioni.UseVisualStyleBackColor = true;
+            this.bAggiungiRecInPartecipazioni.Click += new System.EventHandler(this.bAggiungiRecInPartecipazioni_Click);
             // 
             // label33
             // 

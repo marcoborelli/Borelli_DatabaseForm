@@ -222,6 +222,18 @@ namespace Borelli_DatabaseForm {
             cbSegnoBilancioInProgetti.SelectedIndex = 0;
             LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
         }
+
+        private void bAggiungiRecInPartecipazioni_Click(object sender, EventArgs e) {
+            string q = $"INSERT INTO partecipazioni (id_impiegato, id_progetto) VALUES ('{cbInsCognImpiegInPartecipazioni.SelectedValue}', '{cbInsNomeProgettoInPartecipazioni.SelectedValue}');";
+            ExecQuery(q);
+
+            ResetInsertFieldInPartecipazioni();
+            LoadDataOnSelectedTab(GetBasicQuery(tabControl1.SelectedIndex));
+        }
+
+        private void ResetInsertFieldInPartecipazioni() {
+            cbInsCognImpiegInPartecipazioni.SelectedIndex = cbInsNomeProgettoInPartecipazioni.SelectedIndex = 0;
+        }
         /*FINE TAB 4*/
 
 
