@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Borelli_DatabaseForm {
     public partial class Form1 : Form {
@@ -14,7 +15,7 @@ namespace Borelli_DatabaseForm {
             get {
                 if (_sqlConn == null) {
                     try {
-                        _sqlConn = new MySqlConnection("server=84.33.120.138; port=3306; uid=programma; pwd=12345; database=AziendaImpiegatiProgetti");
+                        _sqlConn = new MySqlConnection(GetDatabaseConnectionRow(filename));
                     } catch (Exception e) {
                         MessageBox.Show(e.Message);
                     }
@@ -33,12 +34,14 @@ namespace Borelli_DatabaseForm {
 
         private readonly DataGridView[] gridsView;
 
+        readonly string filename;
         DataGridViewRow oldRow = null;
         int oldRowIndex = -1;
 
         public Form1() {
             InitializeComponent();
 
+            filename = "dbinfo";
             gridsView = new DataGridView[] { dataGridViewDipartimenti, dataGridViewImpiegati, dataGridViewProgetti, dataGridViewPartecipazioni };
 
             for (int i = 0; i < gridsView.Length; i++) {
@@ -444,6 +447,19 @@ namespace Borelli_DatabaseForm {
             }
 
             return clonedRow;
+        }
+
+        private string GetDatabaseConnectionRow(string fileName) {
+            if (!File.Exists(fileName)) {
+                MessageBox.Show("Impossibile trovare il file con le informazioni per poter accedere al database");
+            }
+
+            string outp = "";
+            using (StreamReader file = new StreamReader(fileName)) {
+                outp = file.ReadLine();
+                file.Close();
+            }
+            return outp;
         }
     }
 }
