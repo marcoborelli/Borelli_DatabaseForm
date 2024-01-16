@@ -293,6 +293,14 @@ namespace Borelli_DatabaseForm {
                     break;
 
                 case (int)eTabPages.Partecipazioni:
+                    datiImpiegatiTmp = new DataTable();
+                    ExecQuery("SELECT impiegati.matricola, impiegati.cognome FROM impiegati").Fill(datiImpiegatiTmp);
+                    ChangeComboBoxIfSmaller(cbInsCognImpiegInPartecipazioni, datiImpiegatiTmp, "cognome", "matricola");
+
+                    DataTable datiDipartimentiTmp = new DataTable();
+                    ExecQuery("SELECT progetti.sigla, progetti.nome FROM progetti").Fill(datiDipartimentiTmp);
+                    ChangeComboBoxIfSmaller(cbInsNomeProgettoInPartecipazioni, datiDipartimentiTmp, "nome", "sigla");
+
                     newCol = GetComboBoxColumn("cognome impiegato", "matricola", dati.DefaultView.ToTable(true, "cognome impiegato", "matricola"));
                     newCol1 = GetComboBoxColumn("nome progetto", "sigla", dati.DefaultView.ToTable(true, "nome progetto", "sigla"));
 
