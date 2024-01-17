@@ -455,6 +455,7 @@ namespace Borelli_DatabaseForm {
         private string GetDatabaseConnectionRow(string fileName) {
             if (!File.Exists(fileName)) {
                 MessageBox.Show("Impossibile trovare il file con le informazioni per poter accedere al database");
+                Environment.Exit(0);
             }
 
             string outp = "";
